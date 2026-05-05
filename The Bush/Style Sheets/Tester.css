@@ -3,6 +3,7 @@
     height: 30px;
     width: 30px;
     position: absolute;
+    z-index: 10;
 }
 
 #stage {

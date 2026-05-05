@@ -10,10 +10,23 @@
 <script src="./Game_Data.js"></script>
 <script>
 $(document).ready(function() { 
+    var currentItemId;
     $(".item").draggable({
+        revert: 'invalid',
+        containment: 'parent',
         start: function (e, ui) {
-            console.log (e);
-            console.log(ui);
+            $("#" + e.currentTarget.id).removeClass("in-inventory")
+            $("#" + e.currentTarget.id).prependTo($("#stage"))
+        }
+    })
+
+    $(".inventory-slot").droppable({
+        accept: ".item",
+        drop: function (e, ui) {
+            console.log(e.target.id)
+            ui.draggable.appendTo($(e.target))
+            ui.draggable.addClass("in-inventory");
+
         }
     })
 
@@ -23,7 +36,7 @@ $(document).ready(function() {
 </head>
 <body>
     <div id= "stage"> 
-         <img class="item in-inventory" id="test-img" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
+         <img class="item" id="test-img" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
 
         <table class="inventory"> 
             <td class= "inventory-slot" id="slot1">  </td>
