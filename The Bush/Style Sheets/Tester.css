@@ -1,0 +1,16 @@
+.item {
+    left: 50%;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+}
+
+#stage {
+    background-image: url(../Images/Test\ Clearing.jpg);
+    background-size: cover;
+}
+
+#test-img:hover {
+    filter: contrast(50%);
+}
+

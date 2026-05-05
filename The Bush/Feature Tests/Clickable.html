@@ -3,15 +3,35 @@
 <head>
 <meta charset="utf-8">
 <title>MMCC3045</title>
-<link href="" rel="stylesheet" />
-<script src=""></script>
+<link href="../Style Sheets/Main.css" rel="stylesheet" />
+<link href="../Style Sheets/Tester.css" rel="stylesheet" />
+<script src="../jquery-4.0.0.min.js"></script>
+<script src="../jquery-ui.js"></script>
+<script src="./Game_Data.js"></script>
 <script>
 $(document).ready(function() { 
+    $(".item").draggable({
+        start: function (e, ui) {
+            console.log (e);
+            console.log(ui);
+        }
+    })
+
 
 })
 </script>
 </head>
 <body>
+    <div id= "stage"> 
+         <img class="item in-inventory" id="test-img" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
 
+        <table class="inventory"> 
+            <td class= "inventory-slot" id="slot1">  </td>
+            <td class= "inventory-slot" id="slot2"> </td>
+            <td class= "inventory-slot" id="slot3"> </td>
+            <td class= "inventory-slot" id="slot4"> </td>
+
+        </table>
+    </div>
 </body>
 </html>
