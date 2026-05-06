@@ -8,36 +8,10 @@
 <script src="../jquery-4.0.0.min.js"></script>
 <script src="../jquery-ui.js"></script>
 <script src="./Game_Data.js"></script>
+<script src="./Game_Helpers.js"></script>
 <script>
 $(document).ready(function() { 
-    $(".item").draggable({
-        revert: function(){
-            if (this.parent() == $(".inventory-slot")){
-                this.addClass("in-inventory");
-                return true;
-            }
-            return true;
-
-        },
-        containment: 'parent',
-        start: function (e, ui) {
-            $("#" + e.currentTarget.id).removeClass("in-inventory")
-            // $("#" + e.currentTarget.id).prependTo($("#stage"))
-        }
-    })
-
-    $(".inventory-slot").droppable({
-        accept: ".item",
-        drop: function (e, ui) {
-            console.log(e.target.id)
-            ui.draggable.appendTo($(e.target))
-            ui.draggable.addClass("in-inventory");
-            localStorage.setItem(e.target.id + "-item", ui.draggable[0].id);
-            console.log(ui.draggable[0].id)
-
-        }
-    })
-
+    
 
 })
 </script>

@@ -7,40 +7,23 @@
 <link href="../Style Sheets/Tester.css" rel="stylesheet" />
 <script src="../jquery-4.0.0.min.js"></script>
 <script src="../jquery-ui.js"></script>
-<script src="./Game_Data.js"></script>
+<script src="./Game_Helpers.js"></script>
 <script>
 $(document).ready(function() { 
 
-    var item = localStorage.getItem("slot1-item");
-    if (item != "undefined") {
-        $("#slot1").append("<img class='item in-inventory' id= " + item + " src= " + axe.src + ">" );
-    }
+    checkSlots();
+    initDragDrop();
 
-    $(".item").draggable({
-        revert: function(){
-            if (this.parent() == $(".inventory-slot")){
-                this.addClass("in-inventory");
-                return true;
-            }
-            return true;
+    // $(".inventory-slot").droppable({
+    //     accept: ".item",
+    //     drop: function (e, ui) {
+    //         console.log(e.target.id)
+    //         ui.draggable.appendTo($(e.target))
+    //         ui.draggable.addClass("in-inventory");
 
-        },
-        containment: 'parent',
-        start: function (e, ui) {
-            $("#" + e.currentTarget.id).removeClass("in-inventory")
-            // $("#" + e.currentTarget.id).prependTo($("#stage"))
-        }
-    })
-
-    $(".inventory-slot").droppable({
-        accept: ".item",
-        drop: function (e, ui) {
-            console.log(e.target.id)
-            ui.draggable.appendTo($(e.target))
-            ui.draggable.addClass("in-inventory");
-
-        }
-    })
+    //     }
+    // })
+    localStorage.setItem("slot3-item", "mobile");
 
 
 })
