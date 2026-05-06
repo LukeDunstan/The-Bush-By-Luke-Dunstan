@@ -12,7 +12,9 @@
 $(document).ready(function() { 
 
     var item = localStorage.getItem("slot1-item");
-    console.log (item)
+    if (item != "undefined") {
+        $("#slot1").append("<img class='item in-inventory' id= " + item + " src= " + axe.src + ">" );
+    }
 
     $(".item").draggable({
         revert: function(){

@@ -1,1 +1,1 @@
-var testVariable = 2345897;
+var axe = { "id": "axe", "src" : "../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png"};
