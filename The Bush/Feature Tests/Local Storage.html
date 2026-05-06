@@ -10,6 +10,10 @@
 <script src="./Game_Data.js"></script>
 <script>
 $(document).ready(function() { 
+
+    var item = localStorage.getItem("slot1-item");
+    console.log (item)
+
     $(".item").draggable({
         revert: function(){
             if (this.parent() == $(".inventory-slot")){
@@ -32,7 +36,6 @@ $(document).ready(function() {
             console.log(e.target.id)
             ui.draggable.appendTo($(e.target))
             ui.draggable.addClass("in-inventory");
-            localStorage.setItem(e.target.id + "-item", ui.draggable.id);
 
         }
     })
@@ -43,8 +46,8 @@ $(document).ready(function() {
 </head>
 <body>
     <div id= "stage"> 
-         <img class="item" id="test-img" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
-        <a href="./Local Storage.html" style="left: 50%; background-color: red; width: 10px; height: 10px;"> continue </a>
+         <!-- <img class="item" id="test-img" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png"> -->
+
         <div class="inventory"> 
             <div class= "inventory-slot" id="slot1">  </div>
             <div class= "inventory-slot" id="slot2"> </div>
