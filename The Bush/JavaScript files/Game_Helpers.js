@@ -13,11 +13,15 @@ var backLocations = {
     "Behind-Desk" : "../Locations/Inide Hut.html",
 }
 
+var fontInterval;
+
 function init() {
+    clearInterval(fontInterval)
     InitCommonElements();
     // InitCommonEventListeners();
     checkSlots();
     initDragDrop();
+    fontInterval = setInterval(FontSizeControl, 100);
 }
 
 //initialise common html elements
@@ -136,4 +140,15 @@ function insertDialogue(dialogueString, speakerName, href) {
             }
         }
     )
+}
+
+//A function to control the font size based on the size of the #backdrop element
+function FontSizeControl(){
+        if ($("#backdrop").css("width") < "800px") {
+            $("p").css("font-size", "x-small");
+            $("h2").css("font-size", "small");
+        } else {
+            $("p").css("font-size", "small");
+            $("h2").css("font-size", "medium");
+        }
 }
