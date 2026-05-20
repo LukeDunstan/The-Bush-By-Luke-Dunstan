@@ -1,0 +1,6 @@
+#backdrop {
+    background-image: url("../Images/Inside-Hut.jpg");
+    background-repeat: round;
+    background-size: contain;
+}
+

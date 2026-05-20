@@ -10,7 +10,7 @@ body {
     grid-template-rows: 85% 15%;
     grid-auto-flow: column;
     background-color: black;
-    max-width: 1300px;
+    max-width: 1000px;
     height: 50%;
     aspect-ratio: 16/9;
     margin: auto;
