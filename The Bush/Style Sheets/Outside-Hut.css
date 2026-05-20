@@ -7,3 +7,9 @@
 #axe{ 
     transform: rotate(-90deg);
 }
+
+#axe-fig {
+    width: 6%;
+    left: 30%;
+    top: 78%;
+}
