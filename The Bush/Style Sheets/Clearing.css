@@ -1,0 +1,32 @@
+#backdrop {
+    background-image: url(../Images/Clearing-test1.jpg);
+    background-size: contain;
+    background-repeat: round;
+}
+
+#hut-path-fig {
+    left: 59%;
+    top: 59%;
+    width: 10%;
+}
+
+#car-path-fig {
+    left: 13.5%;
+    top: 66%;
+    width: 10%;
+}
+
+#bag {
+    width: 15%;
+}
+
+#bag-fig {
+    left: 47%;
+    top: 82%;
+}
+
+#phone-fig {
+    left: 47%;
+    top: 82%;
+    width: 25%;
+}

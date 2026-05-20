@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MMCC3045</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/Clearing.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Data.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
+    <script>
+        $(document).ready(function () {
+            init();
+
+            $("#bag").on("click", function () {
+                if (!SearchSlots("phone")) {
+                    insertDialogue("Bruh, my things are every where.. I could've sworn I left my phone in the front pocket. *bump* Oh there is is.", "Joseph");
+                    $(".dialogue").one("click", function () {
+                    $("#phone-fig").append("<img class='item' id='phone' src='../Images/phone.png'>");
+                    initDragDrop();
+                    $(".inventory-slot").one(
+                        "drop", function (e, ui) {
+                            console.log("dropped")
+                            if (ui.draggable[0].id == "phone"){
+                            insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Joseph");
+                            $(".inventory-slot").off("drop");
+                            
+                        }}
+                    )
+                });
+                } else {
+                    insertDialogue("There's nothing more for me in here right now", "Joseph");
+                }
+                
+            })
+            $("#fire").on("click", function () { insertDialogue("Being cold is the last of my worries", "Josef") })
+            $("#pants").on("click", function () { insertDialogue("I'm not sure how those will help me now", "Josef") })
+            $("#car-path").on("click", function () { insertDialogue("I need to get out of here, maybe I can hot wire the car..", "Joseph", "./Car.html") });
+            $("#hut-path").on("click", function () { insertDialogue("look! a house with a light on.", "Joseph", "./Outside Hut.html") });
+        })
+    </script>
+</head>
+
+<body>
+    <div id="backdrop">
+        <div id="stage">
+            <figure id="bag-fig"> <img class="clickable" id="bag" src="../Images/open-bag.png"></figure>
+            <figure id="fire-fig"> </figure>
+            <figure id="pants-fig"> </figure>
+            <figure id="phone-fig"> </figure>
+            <figure id="car-path-fig"><img class="clickable" id="car-path" src="../Images/car-path.png"> </figure>
+            <figure id="hut-path-fig"> <img class="clickable" id="hut-path" src="../Images/Smol-hut.png" href="">
+            </figure>
+
+        </div>
+        <div class="inventory ui ui1">
+            <div class="inventory-slot" id="slot1"> </div>
+            <div class="inventory-slot" id="slot2"> </div>
+            <div class="inventory-slot" id="slot3"> </div>
+            <div class="inventory-slot" id="slot4"> </div>
+        </div>
+    </div>
+</body>
+
+</html>

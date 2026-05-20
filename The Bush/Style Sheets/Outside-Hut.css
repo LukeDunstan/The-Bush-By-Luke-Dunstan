@@ -1,0 +1,9 @@
+#backdrop {
+    background-image: url("../Images/Ranger-hut.jpg");
+    background-repeat: round;
+    background-size: contain;
+}
+
+#axe{ 
+    transform: rotate(-90deg);
+}

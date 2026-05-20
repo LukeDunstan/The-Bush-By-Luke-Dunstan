@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Car</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/Car.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Data.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
+    <script>
+        $(document).ready(function () {
+            init();
+            insertDialogue("hmm..The lights didn't turn on. I think the battery is dead.", "Josef");
+            $("#power-button").on("click", function () { insertDialogue("I don't have the keys, Eliot has them.", "Josef") });
+
+            $("#wire-box").on("click", function () {
+                if (SearchSlots("car-battery")) {
+                    insertDialogue("I can put this battery in now and get to hotwiring.", "Joseph", "../Minigames/Hotwiring.html");
+                } else {
+                    insertDialogue("There's no point to hotwiring, there is no power.", "Joseph")
+                }
+            })
+
+            $("#back-button").on("click", function () {window.location.href = "../Locations/Clearing.html"})
+        })
+    </script>
+</head>
+
+<body>
+    <div id="backdrop">
+        <div id="stage">
+            <figure id="wire-box-fig"> <img class="clickable" id="wire-box" src="../Images/wirebox.png"> </figure>
+            <figure id="power-button-fig"> <img class="clickable" id="power-button" src="../Images/power-button.png">
+            </figure>
+        </div>
+    </div>
+</body>
+
+</html>

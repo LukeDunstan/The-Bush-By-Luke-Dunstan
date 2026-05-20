@@ -11,18 +11,7 @@
 <script>
 $(document).ready(function() { 
 
-    checkSlots();
-    initDragDrop();
-
-    // $(".inventory-slot").droppable({
-    //     accept: ".item",
-    //     drop: function (e, ui) {
-    //         console.log(e.target.id)
-    //         ui.draggable.appendTo($(e.target))
-    //         ui.draggable.addClass("in-inventory");
-
-    //     }
-    // })
+    init();
     localStorage.setItem("slot3-item", "mobile");
 
 

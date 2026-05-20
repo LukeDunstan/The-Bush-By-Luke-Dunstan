@@ -1,9 +1,0 @@
-#stage {
-    background-image: url(../Images/Test\ Clearing.jpg);
-    background-size: cover;
-}
-
-#test-img:hover {
-    filter: contrast(50%);
-}
-

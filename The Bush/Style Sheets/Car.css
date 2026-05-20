@@ -1,0 +1,17 @@
+#backdrop {
+    background-image: url(../Images/car-dash.jpg);
+    background-size: contain;
+    background-repeat: round;
+}
+
+#wire-box-fig {
+left: 76%;
+top: 61%;
+width: 3.5%;
+}
+
+#power-button-fig {
+  left: 80.5%;
+  top: 61%;
+  width: 2%;
+}

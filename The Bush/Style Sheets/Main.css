@@ -2,8 +2,13 @@ body {
     background-color: rgb(31, 30, 30);
 }
 
-#stage {
-    position: absolute;
+#backdrop {
+    display: grid;
+    grid-template-areas:
+        "content"
+        "ui";
+    grid-template-rows: 85% 15%;
+    grid-auto-flow: column;
     background-color: black;
     max-width: 1300px;
     height: 50%;
@@ -12,27 +17,50 @@ body {
     margin-top: 100px;
 }
 
+#stage {
+    grid-area: content;
+    position: relative;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
 .item {
     margin: auto;
-    height: 30px;
-    width: 30px;
-    position: absolute;
+    position: relative;
     z-index: 10;
 }
 
+.item:hover {
+    filter: contrast(50%);
+}
+
+.clickable:hover {
+    filter: contrast(70%);
+}
+
+figure{
+    position: absolute;
+    margin: 0px;
+}
+
 .inventory {
+    grid-area: ui;
     display: grid;
-    grid-template-columns: repeat(4, 4fr) ;
+    grid-template-columns: repeat(4, 4fr);
     position: relative;
     width: 30%;
-    height: 8%;
+    height: 75%;
     margin: auto;
     background-color: rgba(71, 71, 71, 0.801);
-    margin-bottom: 10px;
-    bottom: -90%
+    margin-bottom: 0.5%;
 }
 
 .inventory-slot {
+    display: grid;
+    justify-items: center;
     height: auto !important;
     border: 1px;
     border-style: solid;
@@ -43,6 +71,46 @@ body {
     left: auto !important;
     top: auto !important;
     position: relative !important;
-    height: 100% !important;
-    width: 100% !important;
+    height: auto;
+    width: 75%;
+}
+
+.dialogue {
+    grid-area: ui;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    border-radius: 20px;
+    background-color: rgba(71, 71, 71, 0.801);
+    position: relative;
+    margin: 0.5%;
+}
+
+.dialogue-text {
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    color: white;
+    margin-left: 2%;
+    margin-top: 0px;
+    overflow: scrol;
+    height: 50%;
+}
+
+.speaker-heading {
+    grid-row: 1;
+    grid-column: 1;
+    background: rgb(35, 35, 35);
+    background: rgb(35, 35, 35);
+    color: white;
+    width: fit-content;
+    padding: 6px;
+    border-radius: 20px;
+    margin: .5%;
+}
+
+.continue {
+    grid-column: 2;
+    grid-row: 1;
+    margin: auto;
+    color: white;
 }
