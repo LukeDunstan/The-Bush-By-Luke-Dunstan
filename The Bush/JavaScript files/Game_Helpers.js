@@ -144,7 +144,7 @@ function insertDialogue(dialogueString, speakerName, href) {
 
 //A function to control the font size based on the size of the #backdrop element
 function FontSizeControl(){
-        if ($("#backdrop").css("width") < "800px") {
+        if (Number($("#backdrop").css("width").substring(0, $("#backdrop").css("width").length-2)) < 800) {
             $("p").css("font-size", "x-small");
             $("h2").css("font-size", "small");
         } else {
