@@ -4,8 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Breathing Minigame Test</title>
-    <link href="" rel="stylesheet" />
-    <script src="../jquery-4.0.0.min.js"></script>
+    <link href="../Style Sheets/Main.css" rel="stylesheet"/>
+    <link href="../Style Sheets/Breathing.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
     <script>
         $(document).ready(function () {
             var isKeyDown = false;
@@ -14,10 +16,10 @@
             var minigameLength = 10.00;
             var timer = 0.00;
             var timerInterval;
+            var stage;
+
 
             $(document).one('keydown', EDown);
-            
-
 
             function EDown(event) {
                 if (event.keyCode == keyCode) {
@@ -57,24 +59,30 @@
             }
 
             setInterval(function () {
-                if (timer < tooLongTreshold/3){
-                    $("body").css("background-color", "green");
-                } else if (timer > tooLongTreshold/3 && timer < (2*tooLongTreshold/3)) {
-                    $("body").css("background-color", "orange");
-                } else if (timer > (2*tooLongTreshold/3)) {
-                    $("body").css("background-color", "red");
+                if (timer < tooLongTreshold / 3) {
+                    stage = 1
+                } else if (timer > tooLongTreshold / 3 && timer < (2 * tooLongTreshold / 3)) {
+                    stage = 2;
+                } else if (timer > (2 * tooLongTreshold / 3)) {
+                    stage = 3;
                 }
-                console.log(timer);
             })
-
-
         })
     </script>
 </head>
 
 <body>
-    <div class= stage>
+    <div id="backdrop">
+        <div class=stage>
 
+        </div>
+        <div class="ui">
+            <div id="bar">
+                <div id="red1"></div>
+                <div id="green"></div>
+                <div id="red2"></div>
+            </div>
+        </div>
     </div>
 </body>
 
