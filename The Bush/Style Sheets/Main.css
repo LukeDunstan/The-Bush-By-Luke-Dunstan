@@ -22,6 +22,10 @@ body {
     position: relative;
 }
 
+#back-button {
+    width: 15%;
+}
+
 img {
     width: 100%;
     height: auto;
