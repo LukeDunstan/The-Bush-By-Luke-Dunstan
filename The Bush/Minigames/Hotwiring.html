@@ -1,17 +1,94 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>MMCC3045</title>
-<link href="" rel="stylesheet" />
-<script src="../jquery-4.0.0.min.js"></script>
-<script>
-$(document).ready(function() { 
+    <meta charset="utf-8">
+    <title>MMCC3045</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/HotWiring.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    ,<script src="../JavaScript files/Game_Helpers.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("svg").attr("height", $(".stage").height());
+            $("svg").attr("width", $(".stage").width());
+            InitDialogueBox();
+            var powerXInitial = GetNumberFromPXAttr("power-line-end", "left");
+            var powerYInitial = GetNumberFromPXAttr("power-line-end", "top");
+            var ignitionXInitial = GetNumberFromPXAttr("ignition-line-end", "left");
+            var ignitionYInitial = GetNumberFromPXAttr("ignition-line-end", "top");
+            var powerConnected = false;
+            var ignitionConnected = false;
+            SetLinePos("ignition-line", ignitionXInitial, ignitionYInitial, GetNumberFromPXAttr("ignition-line-end", "left"), GetNumberFromPXAttr("ignition-line-end", "top"));
+            SetLinePos("power-line", powerXInitial, powerYInitial, GetNumberFromPXAttr("power-line-end", "left"), GetNumberFromPXAttr("power-line-end", "top"));
 
-})
-</script>
+            $(".end").draggable({
+                drag: function (e, ui) {
+                    SetLinePos("ignition-line", ignitionXInitial, ignitionYInitial, GetNumberFromPXAttr("ignition-line-end", "left"), GetNumberFromPXAttr("ignition-line-end", "top"));
+                    SetLinePos("power-line", powerXInitial, powerYInitial, GetNumberFromPXAttr("power-line-end", "left"), GetNumberFromPXAttr("power-line-end", "top"));
+                },
+                containment: "parent"
+            });
+
+            $(".start").droppable({
+                drop: function (e, ui) {
+                    
+                    if (e.target.id.substring(0, 5) == ui.draggable[0].id.substring(0,5)){
+                        if (e.target.id.includes("power")){
+                            powerConnected = true;
+                        } else if (e.target.id.includes("ignition")) {
+                            ignitionConnected = true;
+                        }
+                    }
+
+                    if (powerConnected && ignitionConnected){
+                        BothConnected();
+                    }
+                },
+
+                accept: ".end"
+            })
+        })
+
+        function BothConnected(){
+            insertDialogue("Sweet it started! Let's get out of here", "Josef", "../Locations/Ending.html");
+        }
+
+        function SetLinePos(lineID, xStart, yStart, xEnd, yEnd) {
+            $("#" + lineID).attr("x1", xStart - 90);
+            $("#" + lineID).attr("y1", yStart - 115);
+            $("#" + lineID).attr("x2", xEnd - 90);
+            $("#" + lineID).attr("y2", yEnd - 115);
+        }
+
+        function GetNumberFromPXAttr(selector, attr) {
+            return $("#"+ selector).css(attr).substring(0, $("#"+ selector).css(attr).length - 2);
+        }
+    </script>
 </head>
-<body>
 
+<body>
+    <div id="backdrop">
+        <div class=stage>
+            <svg height="0" width="0" style="position: absolute;">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:red;stroke-width:10" id="power-line"></line>
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(137, 34, 255);stroke-width:10" id="ignition-line">
+                </line>
+
+            </svg>
+            <figure id="power-line-start" class="plug-fig start"> <img class="plug" src="../Images/power-button.png">
+            </figure>
+            <figure id="power-line-end" class="plug-fig end"> <img class="plug" src="../Images/power-button.png">
+            </figure>
+            <figure id="ignition-line-start" class="plug-fig start"> <img class="plug" src="../Images/power-button.png">
+            </figure>
+            <figure id="ignition-line-end" class="plug-fig end"> <img class="plug" src="../Images/power-button.png">
+            </figure>
+        </div>
+        <div class="ui">
+        </div>
+    </div>
 </body>
+
 </html>

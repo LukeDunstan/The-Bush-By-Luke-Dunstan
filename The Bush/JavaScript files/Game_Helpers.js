@@ -45,6 +45,20 @@ function InitCommonElements(){
     $(".dialogue").hide();
 }
 
+function InitDialogueBox() {
+    $("#backdrop").append(
+        "<div class='dialogue ui ui2'> \
+            <h2 class=speaker-heading></h2> \
+            <p class='continue'> Click to continue </p> \
+            <p class='dialogue-text'></p> \
+        </div> \
+        <figure class='ui ui1' id='back-button-fig'> <img class='clickable' id='back-button' \
+                src='../Images/Back.png'> </figure>"
+    );
+
+    $(".dialogue").hide();
+}
+
 //initialise event listeners that are common between scenes
 function InitCommonEventListeners(){
     var title = $(document).title;
