@@ -4,3 +4,20 @@
     background-size: contain;
 }
 
+#locker-fig {
+    left: 62%;
+    width: 25%;
+    top: 38%;
+}
+
+#cellar-fig {
+    width: 20%;
+    left: 45%;
+    top: 52%;
+}
+
+#desk-fig {
+    width: 30%;
+    top: 56%;
+    left: 15%;
+}

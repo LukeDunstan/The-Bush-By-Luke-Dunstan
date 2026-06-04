@@ -14,15 +14,19 @@ $(document).ready(function() {
     init();
 
     $("#back-button").on("click", function () {window.location.href = "../Locations/Outside Hut.html"})
+
+    $("#desk").on("click", function() {insertDialogue("clicked desk", "O' Great One")})
+    $("#cellar").on("click", function() {insertDialogue("clicked cellar")})
+    $("#locker").on("click", function() {insertDialogue("clicked locker")})
 })
 </script>
 </head>
 <body>
     <div id="backdrop">
         <div id="stage">
-            <figure id="desk-fig"> </figure>
-            <figure id="cellar-fig"> </figure>
-            <figure id="locker-fig"> </figure>
+            <figure id="desk-fig"> <img id="desk" class="clickable" src="../Images/desk.png"></figure>
+            <figure id="cellar-fig"> <img id="cellar" class="clickable" src="../Images/cellar-door-cropped.png"></figure>
+            <figure id="locker-fig"> <img id="locker" class="clickable" src="../Images/locker.png"</figure>
         </div>
     </div>
 </body>
