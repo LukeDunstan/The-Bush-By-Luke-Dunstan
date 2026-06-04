@@ -14,6 +14,8 @@ $(document).ready(function() {
     init();
 
     $("#back-button").on("click", function () {window.location.href = "../Locations/Clearing.html"})
+    $("#ranger-door").on("click", function () {window.location.href = "../Locations/Inside Hut.html"})
+
 })
 </script>
 </head>
@@ -21,6 +23,7 @@ $(document).ready(function() {
     <div id="backdrop">
         <div id="stage">
             <figure id="axe-fig"> <img class="item" id="axe"  src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png"> </figure>
+            <figure id="ranger-door-fig"> <img class="clickable" id="ranger-door" src="../Images/Ranger-Door.png"> </figure>
         </div>
         <div class="inventory">
             <div class="inventory-slot" id="slot1"> </div>
