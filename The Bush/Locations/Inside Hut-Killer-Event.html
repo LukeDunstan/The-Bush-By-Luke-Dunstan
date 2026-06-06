@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MMCC3045</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/Inside-Hut.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Data.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
+    <script>
+        $(document).ready(function () {
+            InitDialogueBox();
+            // $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
+            if (localStorage.getItem("cellarUnlocked")) {
+                insertNarration("The killer stands before Josef and The Ranger, cocking a gun and aiming it at Josef")
+                $(".dialogue").one("click", function () {
+                    insertNarration("Before Josef can react, The Ranger yells and rushes the killer");
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("Ahhhhh!!", "Ranger");
+                        $(".dialogue").one("click", function () {
+                            insertNarration("Joseph has the oppourtunity to cut down the killer with the axe while he is preoccupied with The Ranger.");
+                            $(".dialogue").one("click", function () {
+                                insertNarration("Does he:\
+                                A) Take the opportunity\
+                                B) Try to rush in himself");
+                                $(".dialogue").off("click");
+                                $(document).one("keydown", function (event) {
+                                    //Josef Kills killer
+                                    if (event.key == "A" || event.key == "a") {
+                                        insertNarration("Josef, taking advantage of the distraction, charges in with his axe for a swing.");
+                                        $(".dialogue").one("click", function () {
+                                            insertNarration("Josef hits the killer in the side of the neck, embedding the axe and killing the killer.");
+                                            $(".dialogue").one("click", function () {
+                                                insertDialogue("Oh god, what have I done. You okay Ranger?", "Josef");
+                                                $(".dialogue").one("click", function () {
+                                                    insertDialogue("Ranger?", "Josef");
+                                                    $(".dialogue").one("click", function () {
+                                                        insertNarration("Josef looks back toward The Ranger, who is now holding his chest and trying to keep the blood from coming out.");
+                                                        $(".dialogue").one("click", function () {
+                                                            insertDialogue("Ouch, he got me kid. Tell my wife I love her, I'm glad you're safe.");
+                                                            $(".dialogue").one("click", function () {
+                                                                insertNarration("He smiles a weak smile at Josef as he crumples to the ground, dead.");
+                                                                $(".dialogue").one("click", function () {
+                                                                    insertDialogue("No No please, it should have been me!");
+                                                                    $(".dialogue").one("click", function () {
+                                                                        localStorage.setItem("rangerDead", true);
+                                                                        insertDialogue("I need to call the police, or get out of here.", "Josef", "../Locations/Inside Hut.html")
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    } else if (event.key == "B" || event.key == "b") {
+                                        //Ranger kills killer
+                                        insertNarration("Josef loudly rushes the killer, gaining the killers attention once again");
+                                        $(".dialogue").one("click", function () {
+                                            insertDialogue("Leave him alone!", "Josef");
+                                            $(".dialogue").one("click", function () {
+                                                insertNarration("The killer shoots Josef in the knee, but starts struggling with The Ranger.");
+                                                $(".dialogue").one("click", function () {
+                                                    insertNarration("The Ranger manages to wrestle the gun from the killers hand a pulls the trigger *BANG* The killer falls to the ground");
+                                                    $(".dialogue").one("click", function () {
+                                                        insertDialogue("Flithy animal.", "Ranger");
+                                                        $(".dialogue").one("click", function () {
+                                                            insertDialogue("You okay kid? Lets get this wrapped but and call you an ambulance, you got a phone?");
+                                                            $(".dialogue").one("click", function () {
+                                                                insertDialogue("On...Charge.", "Josef");
+                                                                $(".dialogue").one("click", function () {
+                                                                    insertNarration("After bandaging up Josef's knee The Ranger walks over to the desk and grabs Josef's phone from charge");
+                                                                    $(".dialogue").one("click", function () {
+                                                                        insertDialogue("You have loads of messages, probably best to look at those once we're safe.");
+                                                                        $(".dialogue").one("click", function () {
+                                                                            insertNarration("the Ranger calls the ambulance and the police to find that they're already on their way");
+                                                                            $(".dialogue").one("click", function () {
+                                                                                insertDialogue("Maybe those messages are important now, the authorities are on their way");
+                                                                                $(".dialogue").one("click", function () {
+                                                                                    insertNarration("The Ranger hands Josef the phone. Josef looks and find messages from his famliy and some friends");
+                                                                                    $(".dialogue").one("click", function () {
+                                                                                        insertNarration('"Do not go with that man!"~Mum "Police came around asking about Cody"~Kate "Bro i just heard Cody is a serial killer?"~George');
+                                                                                        $(".dialogue").one("click", function () {
+                                                                                            localStorage.setItem("killerDead", true);
+                                                                                            localStorage.setItem("rangerDead", false);
+                                                                                            insertDialogue("Cody was the killer?", "Josef", "../Locations/Ending.html");
+                                        })
+                                        })
+                                        })
+                                        })
+                                        })
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    }
+                                })
+                            })
+                        })
+                    })
+                })
+            }
+        }) 
+    </script>
+</head>
+
+<body>
+    <div id="backdrop">
+        <div id="stage">
+            <figure id="car-battery-fig"></figure>
+            <figure id="desk-fig"> <img id="desk" class="clickable" src="../Images/desk.png"></figure>
+            <figure id="cellar-fig"> <img id="cellar" class="clickable" src="../Images/cellar-door-cropped.png">
+            </figure>
+            <figure id="locker-fig"> <img id="locker" class="clickable" src="../Images/locker.png"></figure>
+        </div>
+    </div>
+</body>
+
+</html>
