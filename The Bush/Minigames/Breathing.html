@@ -4,84 +4,113 @@
 <head>
     <meta charset="utf-8">
     <title>Breathing Minigame Test</title>
-    <link href="../Style Sheets/Main.css" rel="stylesheet"/>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
     <link href="../Style Sheets/Breathing.css" rel="stylesheet" />
     <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
     <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
     <script>
         $(document).ready(function () {
-            var isKeyDown = false;
-            var keyCode = 69;
+            var code = "Space";
             var tooLongTreshold = 4.00 // seconds
-            var minigameLength = 10.00;
-            var timer = 0.00;
+            var minigameLength = 10.00; // seconds
+            var timer = 2.00; // seconds
             var timerInterval;
-            var stage;
-
-
+            var gameTimer = 0;
+            var isDown = false;
+            var headIconElement = $("#head");
             $(document).one('keydown', EDown);
+            InitDialogueBox();
+
+            insertNarration("Read the instructions above, click when ready to start")
+            $(".dialogue").one("click", function () {
+                timerInterval = setInterval(mainLoop, 1);
+                MoveHead();
+            })
+
+            function mainLoop() {
+                if (isDown) {
+                    timer += .010001;
+                } else {
+                    timer -= .010001;
+                }
+                
+                MoveHead();
+                gameTimer += .004;
+                console.log(gameTimer);
+                if (timer >= tooLongTreshold || timer <= 0) {
+                    insertDialogue("I knew there was someone in here", "Cody");
+                    clearInterval(timerInterval);
+                } else if (gameTimer >= minigameLength){
+                    clearInterval(timerInterval);
+                    insertNarration("A sound is heard outside in the distance, Cody goes out to investigate", "../Locations/Inside Hut.html");
+                }
+            }
 
             function EDown(event) {
-                if (event.keyCode == keyCode) {
-                    clearInterval(timerInterval);
+                if (event.code == code) {
                     $(document).one('keyup', EUp);
-                    if (timer < 0) {
-                        timer = 0;
-                        timerInterval = setInterval(AddTimer, 100);
-                    } else {
-                        timerInterval = setInterval(AddTimer, 100);
-                    }
+                    isDown = true;
                 } else {
                     $(document).one('keydown', EDown);
                 }
             }
 
             function EUp(event) {
-                if (event.keyCode == keyCode) {
+                if (event.code == code) {
                     $(document).one('keydown', EDown);
-                    clearInterval(timerInterval);
-                    timerInterval = setInterval(ReduceTimer, 100);
+                    isDown = false;
                 } else {
                     $(document).one('keyup', EUp);
                 }
             }
 
-            function AddTimer() {
-                timer += 0.10001;
-            }
+            // move head along bar via percentage of timer over too long threshold with offset
+            function MoveHead() {
+                var headTargetPos = (((timer / tooLongTreshold)) * headIconElement.parent().width()) - 30;
+                headIconElement.css("left", headTargetPos);
 
-            function ReduceTimer() {
-                if (timer > 0) {
-                    timer -= 0.10001;
-                } else {
-                    clearInterval(timerInterval);
-                }
             }
 
             setInterval(function () {
-                if (timer < tooLongTreshold / 3) {
-                    stage = 1
-                } else if (timer > tooLongTreshold / 3 && timer < (2 * tooLongTreshold / 3)) {
-                    stage = 2;
-                } else if (timer > (2 * tooLongTreshold / 3)) {
-                    stage = 3;
+                if (timer / tooLongTreshold * 100 < 10) {
+                    headIconElement.attr("src", "../Images/head-red.png")
+                } else if (timer / tooLongTreshold * 100 > 10 && timer / tooLongTreshold * 100 < 40) {
+                    headIconElement.attr("src", "../Images/head-orange.png")
+                } else if (timer / tooLongTreshold * 100 > 40 && timer / tooLongTreshold * 100 < 60) {
+                    headIconElement.attr("src", "../Images/head-green.png")
+                } else if (timer / tooLongTreshold * 100 > 60 && timer / tooLongTreshold * 100 < 90) {
+                    headIconElement.attr("src", "../Images/head-orange.png")
+                } else if (timer / tooLongTreshold * 100 > 90) {
+                    headIconElement.attr("src", "../Images/head-red.png")
                 }
             })
+
+
         })
     </script>
 </head>
 
 <body>
     <div id="backdrop">
-        <div class=stage>
-
+        <div id="stage">
+            <h1 class="MG-instructions"> Control Your breathing so you breathe quietly, Hold "SPACE" to hold your
+                breath. Keep the head in the green.</h1>
+            <figure id="car-battery-fig"></figure>
+            <figure id="desk-fig"> <img id="desk"  src="../Images/desk.png"></figure>
+            <figure id="cellar-fig"> <img id="cellar"  src="../Images/cellar-door-cropped.png">
+            </figure>
+            <figure id="locker-fig"> <img id="locker"  src="../Images/locker.png"></figure>
         </div>
-        <div class="ui">
-            <div id="bar">
-                <div id="red1"></div>
-                <div id="green"></div>
-                <div id="red2"></div>
-            </div>
+
+        <div id="bar" class="ui ui1">
+            <img id="head" src="../Images/head.png" style="left: 240px">
+            <div class="colour" id="red2"></div>
+            <div class="colour" id="orange"></div>
+            <div class="colour" id="green"></div>
+            <div class="colour" id="orange2"></div>
+            <div class="colour" id="red"></div>
+
         </div>
     </div>
 </body>

@@ -22,6 +22,13 @@ body {
     position: relative;
 }
 
+.MG-instructions {
+    margin-left: 15%;
+    margin-right: 15%;
+    color: white;
+    text-align: center;
+}
+
 #back-button {
     width: 15%;
 }

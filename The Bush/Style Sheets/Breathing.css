@@ -1,0 +1,88 @@
+#backdrop {
+    background-image: url("../Images/Inside-Hut.jpg");
+    background-repeat: round;
+    background-size: contain;
+}
+
+#locker-fig {
+    left: 62%;
+    width: 25%;
+    top: 38%;
+}
+
+#cellar-fig {
+    width: 20%;
+    left: 45%;
+    top: 52%;
+}
+
+#desk-fig {
+    width: 30%;
+    top: 56%;
+    left: 15%;
+}
+
+#car-battery-fig {
+    left: 18%;
+    top: 50%;
+    width: 6%;
+}
+
+#green {
+
+    background-color: rgb(0, 255, 55);
+    grid-column: 3;
+
+}
+
+#red {
+    background-color: #ff0000;
+    grid-column: 1;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#orange {
+    background-color: #ffae00;
+    grid-column: 2;
+
+}
+
+#red2 {
+    background-color: #ff0000;
+    grid-column: 5;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+#orange2 {
+    background-color: #ffae00;
+    grid-column: 4;
+
+}
+
+.colour {
+    grid-row: 1;
+}
+
+#bar {
+    position: relative;
+    display: grid;
+    grid-template-columns: 10% 30% 20% 30% 10%;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    border-color: black;
+    width: 54%;
+    height: 30%;
+    justify-self: center;
+    align-self: center;
+}
+
+#head {
+    position: absolute;
+    width: 10%;
+    left: -4%;
+    top: -64%;
+}
