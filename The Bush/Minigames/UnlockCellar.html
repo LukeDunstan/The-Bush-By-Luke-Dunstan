@@ -8,6 +8,7 @@
     <link href="../Style Sheets/Unlock-Cellar.css" rel="stylesheet" />
     <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
     <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"> </script>
     <script>
         $(document).ready(function () {
             var isKeyDown = false;
@@ -23,14 +24,15 @@
             var strikes = 0;
             
             
-            
+            InitDialogueBox();
             setInterval(MoveAxe, 1)
             $(document).on('keydown', hit);
 
             function hit(e){ 
                 if(e.keyCode == keyCode){
                     if (axePosPercent > 35 && axePosPercent < 55){
-                        console.log("yes");
+                        localStorage.setItem("cellarUnlocked", true);
+                        insertNarration ("*CRASH* the lock broke!", "../Locations/Inside Hut.html");
                     } else {
                         strikes = strikes + 1
                     }
@@ -73,14 +75,12 @@
         <div class=stage>
 
         </div>
-        <div class="ui">
-            <div id="bar">
+            <div id="bar" class="ui ui1">
                 <img id="axe-icon" src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
                 <div id="red1"></div>
                 <div id="green"></div>
                 <div id="red2"></div>
             </div>
-        </div>
     </div>
 </body>
 

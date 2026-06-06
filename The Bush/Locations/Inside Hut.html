@@ -1,33 +1,186 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>MMCC3045</title>
-<link href="../Style Sheets/Main.css" rel="stylesheet" />
-<link href="../Style Sheets/Inside-Hut.css" rel="stylesheet" />
-<script src="../JavaScript files/jquery-4.0.0.min.js"></script>
-<script src="../JavaScript files/jquery-ui.js"></script>
-<script src="../JavaScript files/Game_Data.js"></script>
-<script src="../JavaScript files/Game_Helpers.js"></script>
-<script>
-$(document).ready(function() { 
-    init();
+    <meta charset="utf-8">
+    <title>MMCC3045</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/Inside-Hut.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Data.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
+    <script>
+        var isPhoneCharging = CheckIfTrueInStorage("isPhoneCharging");
+        var hasAxe = SearchSlots("axe");
+        var iskillerComing = false;
+        var KillerTimer;
+        var timer;
+        var secondsToWait = 5;
 
-    $("#back-button").on("click", function () {window.location.href = "../Locations/Outside Hut.html"})
+        $(document).ready(function () {
+            init();
+            $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
+            if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
+                RangerJosefDialogue();
+            }
 
-    $("#desk").on("click", function() {insertDialogue("clicked desk", "O' Great One")})
-    $("#cellar").on("click", function() {insertDialogue("clicked cellar")})
-    $("#locker").on("click", function() {insertDialogue("clicked locker")})
-})
-</script>
+            $("#desk").on("click", function () {
+                if (SearchSlots("phone")) {
+                    insertDialogue("Nice, I can plug my phone in here, *Click*", "Josef");
+                    $(".dialogue").one("click", function () {
+                        isPhoneCharging = true;
+                        localStorage.setItem("isPhoneCharging", "true");
+                        RemoveFromInventory("phone");
+                        CommonDeskDialogue();
+                    })
+                } else {
+                    CommonDeskDialogue();
+                }
+
+                function CommonDeskDialogue() {
+                    insertDialogue("What's this?", "Josef");
+                    $(".dialogue").one("click", function () {
+                        insertNarration("You see a map on the desk detailing your trip with Cody");
+                        $(".dialogue").one("click", function () {
+                            insertDialogue("How are our plans for the trip are here? Maybe Cody is looking for me.");
+                        })
+                    })
+                    if (isPhoneCharging) {
+                        insertDialogue("Damn the phone hasn't turned on yet, I should look around more", "Josef");
+                    } else {
+                        insertDialogue("Oh a charger, this will be handy if I find my phone", "Josef");
+                    }
+                }
+
+            })
+            $("#cellar").on("click", function () {
+                if (SearchSlots("phone")) {
+                    insertDialogue("I should really charge this phone", "Josef");
+                } else if (localStorage.getItem("rangerTalked")) {
+                    insertDialogue("I already let the ranger out, we need to escape", "Josef");
+                } else {
+                    insertDialogue("*Thump Thump*... *Muffled pleas for help*", "Unknown");
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("Cody are you in there?!? I'll try and get this open", "Josef");
+                        $(".dialogue").one("click", function () {
+                            insertNarration("The doors are locked shut.")
+                            $(".dialogue").one("click", function () {
+                                if (hasAxe) {
+                                    insertDialogue("I can use the axe to break to door, Step back", "Josef", "../Minigames/UnlockCellar.html");
+
+                                } else {
+                                    insertDialogue("I need something heavy to break the door, there was an axe outside I could use", "Josef");
+                                }
+                            })
+                        })
+                    })
+                }
+            })
+            $("#locker").on("click", function () {
+                if (!iskillerComing) {
+                    insertDialogue("This could be a useful hiding spot if needed", "Josef");
+                } else {
+                    clearInterval(KillerTimer);
+                    KillerWalksIn();
+                }
+            })
+        })
+
+        function RangerJosefDialogue() {
+            insertNarration("you help out the person in the cellar to find they are not Cody but the Ranger of this hut, missing two fingers");
+            $(".dialogue").one("click", function () {
+                insertDialogue("You're not Cody, who are you?", "Josef");
+                $(".dialogue").one("click", function () {
+                    insertDialogue("Thank you for rescuing me, I'm the Ranger of this park.", "Ranger");
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("There is a psycopath canibal loose, he locked me in the cellar after taking two of my fingers for a snack", "Ranger");
+                        $(".dialogue").one("click", function () {
+                            insertDialogue("Jesus, I knew there was something going on but a canibal? Can you help me find my friend?", "Josef");
+                            $(".dialogue").one("click", function () {
+                                insertDialogue("Sure thing kid, that's kind of my job", "Ranger");
+                                $(".dialogue").one("click", function () {
+                                    insertNarration("The Ranger has joined you");
+                                    localStorage.setItem("rangerTalked", true);
+                                    $(".dialogue").one("click", function () {
+                                        KillerComing();
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+
+            })
+        }
+
+        function KillerWalksIn() {
+            insertNarration("A hooded figure walks into the hut and over to the desk, placing a car battery on top and sighing as he takes his hood off revealing... Cody?!");
+            $(".dialogue").one("click", function () {
+                if (!localStorage.getItem("cellarUnlocked")) {
+                    insertNarration("Cody notices the mess left by Josef looking at the desk.")
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("Damn he's been here. He's going to cook up nicely when I find him", "Cody");
+                        $(".dialogue").one("click", function () {
+                            insertNarration("Cody cocks a gun in his hand and set back out to look for Josef");
+                        })
+                    })
+                } else {
+                    insertNarration("Cody looks toward the cellar, noticing the broken lock.")
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("Damn he's got out, now I have two meals to look for", "Cody");
+                        $(".dialogue").one("click", function () {
+                            insertNarration("Cody cocks a gun in his hand and set back outside when he hears a noise coming from the locker");
+                            $(".dialogue").one("click", function () {
+                            insertDialogue("Still here I see", "Cody");
+                            $(".dialogue").one("click", function () {
+                            insertNarration("Cody starts walking over to the locker", "../Minigames/Breathing.html");
+                        })
+                        })
+                        })
+                    })
+                }
+            })
+        }
+
+        function KillerComing() {
+            insertNarration("*Thump* Car door closes outside");
+            $(".dialogue").one("click", function () {
+                if (localStorage.getItem("rangerTalked")) {
+                    insertDialogue("Quick we need to hide, those lockers should fit us both. We'll need to hold our breath though", "Ranger");
+                } else {
+                    insertDialogue("Who is that? I should probably hide", "Josef");
+                }
+                $(".dialogue").one("click", function () {
+                    iskillerComing = true;
+                    timer = 0;
+                    KillerTimer = setInterval(WalkingTimer, 1000);
+                })
+
+            })
+        }
+
+        function WalkingTimer() {
+            timer += 1;
+            if (timer >= secondsToWait) {
+                insertDialogue("Aha, I found you", "Unknown");
+                $(".dialogue").one("click", function () { window.location.href = "../Locations/Inside Hut-Killer-Event.html"; })
+            }
+            console.log(timer)
+        }
+    </script>
 </head>
+
 <body>
     <div id="backdrop">
         <div id="stage">
+            <figure id="car-battery-fig"></figure>
             <figure id="desk-fig"> <img id="desk" class="clickable" src="../Images/desk.png"></figure>
-            <figure id="cellar-fig"> <img id="cellar" class="clickable" src="../Images/cellar-door-cropped.png"></figure>
-            <figure id="locker-fig"> <img id="locker" class="clickable" src="../Images/locker.png"</figure>
+            <figure id="cellar-fig"> <img id="cellar" class="clickable" src="../Images/cellar-door-cropped.png">
+            </figure>
+            <figure id="locker-fig"> <img id="locker" class="clickable" src="../Images/locker.png"></figure>
         </div>
     </div>
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 var items = {
     "axe": { "src": "../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png" },
     "phone": { "src": "../Images/phone.png" },
-    "car-battery": { "src": "needed" },
+    "car-battery": { "src": "../Images/car-battery.png" },
 };
 
 var backLocations = {
@@ -115,9 +115,11 @@ function checkSlots() {
     var localItem;
     for (var i = 1; i <= 4; i++) {
         localItem = localStorage.getItem("slot" + i + "-item");
-        if (localItem != "undefined" && localItem != null && !foundItems.includes(localItem)) {
+        console.log(localItem)
+        if (localItem != "undefined" && localItem != null && localItem != "null" && !foundItems.includes(localItem)) {
             foundItems.push(localItem);
             $("#" + localItem).remove();
+            
             $("#slot" + i).append("<img class='item in-inventory' id= " + localItem + " src= " + items[localItem].src + ">");
         } else if (foundItems.includes(localItem)) {
             localStorage.removeItem("slot" + i + "-item");
@@ -135,8 +137,28 @@ function SearchSlots(itemToSearchFor) {
         }
     }
     return false
+}
 
+function RemoveFromInventory(ItemToRemove){
+    var itemsInInventory
+    for (var i = 1; i <= 4; i++) {
+        localItem = localStorage.getItem("slot" + i + "-item");
+        if (localItem != "undefined" && localItem != null && localItem == ItemToRemove) {
+            $("#" + ItemToRemove).remove();
+            localStorage.setItem("slot" + i + "-item", null);
+            return true
+        }
+    }
+    return null
+}
 
+function CheckIfTrueInStorage(ItemToCheck){
+    var checkItem = localStorage.getItem(ItemToCheck);
+    if (checkItem != null && checkItem == true){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function insertDialogue(dialogueString, speakerName, href) {
@@ -144,13 +166,32 @@ function insertDialogue(dialogueString, speakerName, href) {
     $(".dialogue").show();
     $(".speaker-heading").text(speakerName);
     $(".dialogue-text").text(dialogueString);
-    $(".dialogue").on(
+    $(".dialogue").one(
         "click", function () {
             $(".dialogue").hide();
             if (href != null) {
                 window.location.href = href;
             } else {
                 $(".ui1").show();
+            }
+        }
+    )
+}
+
+function insertNarration(dialogueString, href) {
+    $(".ui1").hide();
+    $(".speaker-heading").hide();
+    $(".dialogue").show();
+    $(".dialogue-text").text(dialogueString);
+    $(".dialogue").one(
+        "click", function () {
+            $(".speaker-heading").show();
+            $(".dialogue").hide();
+            if (href != null) {
+                window.location.href = href;
+            } else {
+                $(".ui1").show();
+
             }
         }
     )
