@@ -13,6 +13,10 @@
 $(document).ready(function() { 
     init();
 
+    if (!SearchSlots("axe")){
+        insertDialogue("Odd to have an axe by the door. With how our campsite looked, maybe it will be of use to me", "Josef");
+    }
+
     $("#back-button").on("click", function () {window.location.href = "../Locations/Clearing.html"})
     $("#ranger-door").on("click", function () {window.location.href = "../Locations/Inside Hut.html"})
 
@@ -24,12 +28,6 @@ $(document).ready(function() {
         <div id="stage">
             <figure id="axe-fig"> <img class="item" id="axe"  src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png"> </figure>
             <figure id="ranger-door-fig"> <img class="clickable" id="ranger-door" src="../Images/Ranger-Door.png"> </figure>
-        </div>
-        <div class="inventory">
-            <div class="inventory-slot" id="slot1"> </div>
-            <div class="inventory-slot" id="slot2"> </div>
-            <div class="inventory-slot" id="slot3"> </div>
-            <div class="inventory-slot" id="slot4"> </div>
         </div>
     </div>
 </body>

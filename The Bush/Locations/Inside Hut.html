@@ -21,8 +21,15 @@
         $(document).ready(function () {
             init();
             $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
+
+
+
             if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
                 RangerJosefDialogue();
+            } else if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
+                insertDialogue("Hmm, no one's here", "Josef")
+            } else if (SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
+                insertDialogue("Hmm, no one's here. I should really find somewhere to charge my phone", "Josef")
             }
 
             $("#desk").on("click", function () {
@@ -49,7 +56,7 @@
                     if (isPhoneCharging) {
                         insertDialogue("Damn the phone hasn't turned on yet, I should look around more", "Josef");
                     } else {
-                        insertDialogue("Oh a charger, this will be handy if I find my phone", "Josef");
+                        insertDialogue("Oh a charger, this will be handy if my phone needs charging", "Josef");
                     }
                 }
 
@@ -60,7 +67,7 @@
                 } else if (localStorage.getItem("rangerTalked")) {
                     insertDialogue("I already let the ranger out, we need to escape", "Josef");
                 } else {
-                    insertDialogue("*Thump Thump*... *Muffled pleas for help*", "Unknown");
+                    insertDialogue("*Thump Thump*... *Muffled pleas for help*", "Cody?");
                     $(".dialogue").one("click", function () {
                         insertDialogue("Cody are you in there?!? I'll try and get this open", "Josef");
                         $(".dialogue").one("click", function () {
