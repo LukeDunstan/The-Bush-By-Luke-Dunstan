@@ -39,21 +39,16 @@
                         isPhoneCharging = true;
                         localStorage.setItem("isPhoneCharging", "true");
                         RemoveFromInventory("phone");
-                        CommonDeskDialogue();
-                    })
-                } else {
-                    CommonDeskDialogue();
-                }
-
-                function CommonDeskDialogue() {
-                    insertDialogue("What's this?", "Josef");
-                    $(".dialogue").one("click", function () {
-                        insertNarration("You see a map on the desk detailing your trip with Cody");
+                        insertDialogue("What's this?", "Josef");
                         $(".dialogue").one("click", function () {
-                            insertDialogue("How are our plans for the trip are here? Maybe Cody is looking for me.");
+                            insertNarration("You see a map on the desk detailing your trip with Cody");
+                            $(".dialogue").one("click", function () {
+                                insertDialogue("How are our plans for the trip are here? Maybe Cody has been here and is looking for me with the Ranger.");
+                            })
                         })
                     })
-                    if (isPhoneCharging) {
+                } else {
+                    if (localStorage.getItem("isPhoneCharging")) {
                         insertDialogue("Damn the phone hasn't turned on yet, I should look around more", "Josef");
                     } else {
                         insertDialogue("Oh a charger, this will be handy if my phone needs charging", "Josef");
@@ -123,6 +118,7 @@
 
         function KillerWalksIn() {
             insertNarration("A hooded figure walks into the hut and over to the desk, placing a car battery on top and sighing as he takes his hood off revealing... Cody?!");
+            $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
             $(".dialogue").one("click", function () {
                 if (!localStorage.getItem("cellarUnlocked")) {
                     insertNarration("Cody notices the mess left by Josef looking at the desk.")
@@ -139,11 +135,11 @@
                         $(".dialogue").one("click", function () {
                             insertNarration("Cody cocks a gun in his hand and set back outside when he hears a noise coming from the locker");
                             $(".dialogue").one("click", function () {
-                            insertDialogue("Still here I see", "Cody");
-                            $(".dialogue").one("click", function () {
-                            insertNarration("Cody starts walking over to the locker", "../Minigames/Breathing.html");
-                        })
-                        })
+                                insertDialogue("Still here I see", "Cody");
+                                $(".dialogue").one("click", function () {
+                                    insertNarration("Cody starts walking over to the locker", "../Minigames/Breathing.html");
+                                })
+                            })
                         })
                     })
                 }
