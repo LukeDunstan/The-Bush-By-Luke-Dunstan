@@ -125,3 +125,8 @@ figure{
     margin: auto;
     color: white;
 }
+
+#continue-text {
+  text-align: end;
+  margin-right: 6%;
+}

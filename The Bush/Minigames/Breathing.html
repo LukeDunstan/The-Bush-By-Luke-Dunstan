@@ -39,10 +39,12 @@
                 gameTimer += .004;
                 console.log(gameTimer);
                 if (timer >= tooLongTreshold || timer <= 0) {
-                    insertDialogue("I knew there was someone in here", "Cody");
+                    insertDialogue("I knew there was someone in here", "Cody", '../Locations/Death.html');
+                    localStorage.setItem("deathRespawn", "../Minigames/Breathing.html");
                     clearInterval(timerInterval);
                 } else if (gameTimer >= minigameLength){
                     clearInterval(timerInterval);
+                    localStorage.setItem("breathingSuccess", true);
                     insertNarration("A sound is heard outside in the distance, Cody goes out to investigate", "../Locations/Inside Hut.html");
                 }
             }
