@@ -14,8 +14,13 @@ var backLocations = {
 }
 
 var fontInterval;
-
+var lastLocation;
 function init() {
+    lastLocation = localStorage.getItem("currentLocation")
+    if (lastLocation != null){
+        localStorage.setItem("lastLocation", lastLocation)
+    }
+    localStorage.setItem("currentLocation", window.location.href);
     clearInterval(fontInterval)
     InitCommonElements();
     // InitCommonEventListeners();

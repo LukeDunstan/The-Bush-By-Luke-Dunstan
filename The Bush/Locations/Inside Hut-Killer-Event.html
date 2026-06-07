@@ -13,7 +13,7 @@
     <script>
         $(document).ready(function () {
             InitDialogueBox();
-            // $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
+            
             if (localStorage.getItem("cellarUnlocked")) {
                 insertNarration("The killer stands before Josef and The Ranger, cocking a gun and aiming it at Josef")
                 $(".dialogue").one("click", function () {
@@ -87,11 +87,11 @@
                                                                                             localStorage.setItem("killerDead", true);
                                                                                             localStorage.setItem("rangerDead", false);
                                                                                             insertDialogue("Cody was the killer?", "Josef", "../Locations/Ending.html");
-                                        })
-                                        })
-                                        })
-                                        })
-                                        })
+                                                                                        })
+                                                                                    })
+                                                                                })
+                                                                            })
+                                                                        })
                                                                     })
                                                                 })
                                                             })
