@@ -17,6 +17,10 @@ body {
     margin-top: 100px;
 }
 
+p {
+    align-self: center;
+}
+
 #stage {
     grid-area: content;
     position: relative;

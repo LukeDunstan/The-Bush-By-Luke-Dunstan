@@ -14,30 +14,33 @@
         $(document).ready(function () {
             init();
 
-            insertDialogue("I should look around and see if I can get help, maybe try and call someone if I can find my phone.", "Josef");
+            if (CheckIfFirstTime()) {
+                insertDialogue("I should look around and see if I can get help, maybe try and call someone if I can find my phone.", "Josef");
+            }
 
-            $("#back-button").on("click", function () {window.location.href = "../Locations/index.html"})
+            $("#back-button").on("click", function () { window.location.href = "../Locations/index.html" })
 
             $("#bag").on("click", function () {
-                if (!SearchSlots("phone")) {
+                if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
                     insertDialogue("Bruh, my things are every where.. I could've sworn I left my phone in the front pocket. *bump* Oh there is is.", "Joseph");
                     $(".dialogue").one("click", function () {
-                    $("#phone-fig").append("<img class='item' id='phone' src='../Images/phone.png'>");
-                    initDragDrop();
-                    $(".inventory-slot").one(
-                        "drop", function (e, ui) {
-                            console.log("dropped")
-                            if (ui.draggable[0].id == "phone"){
-                            insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Joseph");
-                            $(".inventory-slot").off("drop");
-                            
-                        }}
-                    )
-                });
+                        $("#phone-fig").append("<img class='item' id='phone' src='../Images/phone.png'>");
+                        initDragDrop();
+                        $(".inventory-slot").one(
+                            "drop", function (e, ui) {
+                                console.log("dropped")
+                                if (ui.draggable[0].id == "phone") {
+                                    insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Joseph");
+                                    $(".inventory-slot").off("drop");
+
+                                }
+                            }
+                        )
+                    });
                 } else {
                     insertDialogue("There's nothing more for me in here right now", "Joseph");
                 }
-                
+
             })
             $("#fire").on("click", function () { insertDialogue("Being cold is the last of my worries", "Josef") })
             $("#pants").on("click", function () { insertDialogue("I'm not sure how those will help me now", "Josef") })

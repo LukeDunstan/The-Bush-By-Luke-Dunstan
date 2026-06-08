@@ -13,8 +13,10 @@
     <script>
         $(document).ready(function () {
             init();
-            insertDialogue("hmm..The lights didn't turn on. I think the battery is dead.", "Josef");
-            $("#power-button").on("click", function () { insertDialogue("I don't have the keys, Eliot has them.", "Josef") });
+            if (CheckIfFirstTime()) {
+                insertDialogue("hmm..The lights didn't turn on. I think the battery is dead.", "Josef");
+            }
+            $("#power-button").on("click", function () { insertDialogue("I don't have the keys, Cody has them.", "Josef") });
 
             $("#wire-box").on("click", function () {
                 if (SearchSlots("car-battery")) {

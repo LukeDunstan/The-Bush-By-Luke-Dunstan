@@ -8,7 +8,7 @@
 }
 
 #ending-text {
-    margin: 8%;
+    
 }
 
 html {
@@ -21,5 +21,20 @@ h1 {
 
 p {
     font-size: large;
+    margin: 8%;
+}
+
+#thank-you{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#thank-text {
+    grid-column: 1;
+}
+
+#menu-click {
+    grid-column: 2;
+    justify-self: end;
 }
 

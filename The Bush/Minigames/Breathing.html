@@ -12,31 +12,33 @@
     <script>
         $(document).ready(function () {
             var code = "Space";
-            var tooLongTreshold = 4.00 // seconds
+            var tooLongTreshold = 2.00 // seconds
             var minigameLength = 10.00; // seconds
             var timer = 2.00; // seconds
             var timerInterval;
             var gameTimer = 0;
             var isDown = false;
             var headIconElement = $("#head");
+            var thisDeltaTime;
             $(document).one('keydown', EDown);
             InitDialogueBox();
 
             insertNarration("Read the instructions above, click when ready to start")
             $(".dialogue").one("click", function () {
-                timerInterval = setInterval(mainLoop, 1);
+                timerInterval = setInterval(mainLoop, 10);
                 MoveHead();
             })
 
             function mainLoop() {
+                thisDeltaTime = GetTimeBetweenIntervals();
                 if (isDown) {
-                    timer += .010001;
+                    timer += 1 * thisDeltaTime;
                 } else {
-                    timer -= .010001;
+                    timer -= 1 * thisDeltaTime;
                 }
                 
                 MoveHead();
-                gameTimer += .004;
+                gameTimer += 1 * thisDeltaTime;
                 console.log(gameTimer);
                 if (timer >= tooLongTreshold || timer <= 0) {
                     insertDialogue("I knew there was someone in here", "Cody", '../Locations/Death.html');

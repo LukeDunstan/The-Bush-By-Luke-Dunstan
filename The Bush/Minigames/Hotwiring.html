@@ -7,13 +7,38 @@
     <link href="../Style Sheets/Main.css" rel="stylesheet" />
     <link href="../Style Sheets/HotWiring.css" rel="stylesheet" />
     <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
-    ,<script src="../JavaScript files/Game_Helpers.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
     <script src="../JavaScript files/jquery-ui.js"></script>
     <script>
+        var thisDeltaTime;
+        var secondsTilDeath = 10;
+        var timer = 0;
+        var gameInterval;
         $(document).ready(function () {
+            InitDialogueBox()
+            HotwiringDraw();
+            insertNarration("connect the wires to complete the circuit and turn on the car before Cody catches you")
+            $(".dialogue").one("click", function () {
+                gameInterval = setInterval(MainLoop, 100);
+            })
+        })
+
+        function MainLoop() {
+            thisDeltaTime = GetTimeBetweenIntervals();
+            timer += 1 * thisDeltaTime;
+            console.log("deltaTime: " + thisDeltaTime);
+            console.log("timer: " + timer);
+            if (timer >= secondsTilDeath) {
+                localStorage.setItem("deathRespawn", window.location.href);
+                clearInterval(gameInterval);
+                insertDialogue("You'll never escape me", "Cody", "../Locations/Death.hmtl");
+            }
+        }
+
+        function HotwiringDraw() {
             $("svg").attr("height", $(".stage").height());
             $("svg").attr("width", $(".stage").width());
-            InitDialogueBox();
+
             var powerXInitial = GetNumberFromPXAttr("power-line-end", "left");
             var powerYInitial = GetNumberFromPXAttr("power-line-end", "top");
             var ignitionXInitial = GetNumberFromPXAttr("ignition-line-end", "left");
@@ -33,44 +58,42 @@
 
             $(".start").droppable({
                 drop: function (e, ui) {
-                    
-                    if (e.target.id.substring(0, 5) == ui.draggable[0].id.substring(0,5)){
-                        if (e.target.id.includes("power")){
+                    if (e.target.id.substring(0, 5) == ui.draggable[0].id.substring(0, 5)) {
+                        if (e.target.id.includes("power")) {
                             powerConnected = true;
                         } else if (e.target.id.includes("ignition")) {
                             ignitionConnected = true;
                         }
                     }
-
-                    if (powerConnected && ignitionConnected){
+                    if (powerConnected && ignitionConnected) {
+                        clearInterval(gameInterval);
                         BothConnected();
                     }
                 },
-
                 accept: ".end"
             })
-        })
+        }
 
-        function BothConnected(){
+        function BothConnected() {
             insertDialogue("Sweet it started! Let's get out of here", "Josef", "../Locations/Ending.html");
         }
 
         function SetLinePos(lineID, xStart, yStart, xEnd, yEnd) {
-            $("#" + lineID).attr("x1", xStart - 90);
-            $("#" + lineID).attr("y1", yStart - 115);
-            $("#" + lineID).attr("x2", xEnd - 90);
-            $("#" + lineID).attr("y2", yEnd - 115);
+            $("#" + lineID).attr("x1", xStart + 12);
+            $("#" + lineID).attr("y1", yStart + 12);
+            $("#" + lineID).attr("x2", xEnd + 12);
+            $("#" + lineID).attr("y2", yEnd + 12);
         }
 
         function GetNumberFromPXAttr(selector, attr) {
-            return $("#"+ selector).css(attr).substring(0, $("#"+ selector).css(attr).length - 2);
+            return Number($("#" + selector).css(attr).substring(0, $("#" + selector).css(attr).length - 2));
         }
     </script>
 </head>
 
 <body>
     <div id="backdrop">
-        <div class=stage>
+        <div class=stage style="position: relative;">
             <svg height="0" width="0" style="position: absolute;">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:red;stroke-width:10" id="power-line"></line>
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(137, 34, 255);stroke-width:10" id="ignition-line">
@@ -85,8 +108,6 @@
             </figure>
             <figure id="ignition-line-end" class="plug-fig end"> <img class="plug" src="../Images/power-button.png">
             </figure>
-        </div>
-        <div class="ui">
         </div>
     </div>
 </body>

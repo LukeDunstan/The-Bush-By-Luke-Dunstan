@@ -11,29 +11,33 @@
 <script src="../JavaScript files/Game_Helpers.js"></script>
 <script>
 $(document).ready(function() { 
+
+    $("#backdrop").one("click", function () {window.location.href = "../Locations/index.html"}
+    )
+
     Ending1();
-    // if(localStorage.getItem("killerDead") == true){
-    //     if (localStorage.getItem("rangerDead") == true) {
-    //         Ending1();
-    //     } else {
-    //         Ending4();
-    //     }
-    // } else if(localStorage("cellarUnlocked") == true){
-    //     Ending2();
-    // } else {
-    //     ending3();
-    // }
+    if(localStorage.getItem("killerDead") == true){
+        if (localStorage.getItem("rangerDead") == true) {
+            Ending1();
+        } else {
+            Ending4();
+        }
+    } else if(localStorage.getItem("cellarUnlocked") == true){
+        Ending2();
+    } else {
+        Ending3();
+    }
 
     function Ending1(){
         $("#ending-text").append(
             '<h1> Epilogue </h1>\
-            <p> The kidnapper is dead but so is the ranger. \
-                    Josef discovers the kidnapper is Cody first and has to live through the trauma of killing a friend as well as having someone die for him. \
-                    Josef looks at the phone afterwards and calls the police, telling them what he has done. \
-                    Josef must live with this traumatic experience. </p>\
+            <p> The Killer is dead but so is the ranger. \
+                    Josef does not end up facing any criminal action as he killed in self-defence however Josef must live with killing a friend as well as having someone die for him.\
+                    Josef was never the same after this event. </p>\
                     '
         )
     }
+
 
     function Ending2(){
 
@@ -49,6 +53,10 @@ $(document).ready(function() {
     <div id="backdrop">
         <div id="ending-text">
                 <!-- ending injected here -->
+        </div>
+        <div id="thank-you">
+            <p id="thank-text"> Thank you for playing</p>
+            <p id="menu-click"> Click to go to main menu</p>
         </div>
     </div>
 </body>

@@ -7,17 +7,17 @@ var items = {
 };
 
 var backLocations = {
-    "Car" : "../Locations/Clearing.html",
-    "Outside-Hut" : "../Locations/Clearing.html",
-    "Inside-Hut" : "../Locations/Outside Hut.html",
-    "Behind-Desk" : "../Locations/Inide Hut.html",
+    "Car": "../Locations/Clearing.html",
+    "Outside-Hut": "../Locations/Clearing.html",
+    "Inside-Hut": "../Locations/Outside Hut.html",
+    "Behind-Desk": "../Locations/Inide Hut.html",
 }
 
 var fontInterval;
 var lastLocation;
 function init() {
     lastLocation = localStorage.getItem("currentLocation")
-    if (lastLocation != null){
+    if (lastLocation != null) {
         localStorage.setItem("lastLocation", lastLocation)
     }
     localStorage.setItem("currentLocation", window.location.href);
@@ -30,7 +30,7 @@ function init() {
 }
 
 //initialise common html elements
-function InitCommonElements(){
+function InitCommonElements() {
     $("#backdrop").append(
         "<div class='inventory ui ui1'> \
             <div class='inventory-slot' id='slot1'> </div> \
@@ -50,30 +50,37 @@ function InitCommonElements(){
     $(".dialogue").hide();
 }
 
+function CheckIfFirstTime() {
+    if (localStorage.getItem("firstTimeAt" + window.location.href)) {
+        return false;
+    } else {
+        localStorage.setItem("firstTimeAt" + window.location.href, true);
+        return true;
+    }
+}
+
 function InitDialogueBox() {
     $("#backdrop").append(
         "<div class='dialogue ui ui2'> \
             <h2 class=speaker-heading></h2> \
             <p class='continue'> Click to continue </p> \
             <p class='dialogue-text'></p> \
-        </div> \
-        <figure class='ui ui1' id='back-button-fig'> <img class='clickable' id='back-button' \
-                src='../Images/Back.png'> </figure>"
+        </div>"
     );
 
     $(".dialogue").hide();
 }
 
 //initialise event listeners that are common between scenes
-function InitCommonEventListeners(){
+function InitCommonEventListeners() {
     var title = $(document).title;
     var location = backLocations.Car;
-    if(location == null) {
+    if (location == null) {
         $("#back-button").hide();
-    } else{
-        $("#back-button").on("click", function () {window.location.href = location})
+    } else {
+        $("#back-button").on("click", function () { window.location.href = location })
     }
-    
+
 }
 
 
@@ -124,7 +131,7 @@ function checkSlots() {
         if (localItem != "undefined" && localItem != null && localItem != "null" && !foundItems.includes(localItem)) {
             foundItems.push(localItem);
             $("#" + localItem).remove();
-            
+
             $("#slot" + i).append("<img class='item in-inventory' id= " + localItem + " src= " + items[localItem].src + ">");
         } else if (foundItems.includes(localItem)) {
             localStorage.removeItem("slot" + i + "-item");
@@ -144,7 +151,7 @@ function SearchSlots(itemToSearchFor) {
     return false
 }
 
-function RemoveFromInventory(ItemToRemove){
+function RemoveFromInventory(ItemToRemove) {
     var itemsInInventory
     for (var i = 1; i <= 4; i++) {
         localItem = localStorage.getItem("slot" + i + "-item");
@@ -157,9 +164,9 @@ function RemoveFromInventory(ItemToRemove){
     return null
 }
 
-function CheckIfTrueInStorage(ItemToCheck){
+function CheckIfTrueInStorage(ItemToCheck) {
     var checkItem = localStorage.getItem(ItemToCheck);
-    if (checkItem != null && checkItem == true){
+    if (checkItem != null && checkItem == true) {
         return true;
     } else {
         return false;
@@ -183,6 +190,21 @@ function insertDialogue(dialogueString, speakerName, href) {
     )
 }
 
+//Idea taken from unity method Time.deltaTime to synchronise timestep across browsers 
+// as I was having trouble when switching between firefox and safari on my PC and macbook respectively.
+var lastTime;
+var deltaTime;
+function GetTimeBetweenIntervals(){
+    deltaTime = (Date.now()/1000) - lastTime;
+    lastTime = Date.now()/1000;
+    if (deltaTime < 1 && deltaTime > 0) {
+        return deltaTime;
+    } else {
+        return 0;
+    }
+    console.log("dateNow: " + Date.now())
+}
+
 function insertNarration(dialogueString, href) {
     $(".ui1").hide();
     $(".speaker-heading").hide();
@@ -203,12 +225,12 @@ function insertNarration(dialogueString, href) {
 }
 
 //A function to control the font size based on the size of the #backdrop element
-function FontSizeControl(){
-        if (Number($("#backdrop").css("width").substring(0, $("#backdrop").css("width").length-2)) < 800) {
-            $("p").css("font-size", "x-small");
-            $("h2").css("font-size", "small");
-        } else {
-            $("p").css("font-size", "small");
-            $("h2").css("font-size", "medium");
-        }
+function FontSizeControl() {
+    if (Number($("#backdrop").css("width").substring(0, $("#backdrop").css("width").length - 2)) < 800) {
+        $("p").css("font-size", "x-small");
+        $("h2").css("font-size", "small");
+    } else {
+        $("p").css("font-size", "small");
+        $("h2").css("font-size", "medium");
+    }
 }

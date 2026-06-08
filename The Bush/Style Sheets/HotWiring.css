@@ -3,8 +3,9 @@
 }
 
 #power-line-end {
-    left: 89.5%;
+    left: 97.5%;
     top: 60%;
+    z-index: 3;
 }
 
 #ignition-line-start {
@@ -12,6 +13,7 @@
 }
 
 #ignition-line-end {
-    left: 89.5%;
+    left: 97.5%;
     top: 20%;
+    z-index: 3;
 }

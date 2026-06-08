@@ -23,9 +23,10 @@
                         $(".dialogue").one("click", function () {
                             insertNarration("Joseph has the oppourtunity to cut down the killer with the axe while he is preoccupied with The Ranger.");
                             $(".dialogue").one("click", function () {
-                                insertNarration("Does he:\
-                                A) Take the opportunity\
+                                insertNarration("Does he (use the corresponding keyboard keys):\
+                                A) Take the opportunity or \
                                 B) Try to rush in himself");
+                                $(".continue").remove();
                                 $(".dialogue").off("click");
                                 $(document).one("keydown", function (event) {
                                     //Josef Kills killer
@@ -47,6 +48,7 @@
                                                                     insertDialogue("No No please, it should have been me!");
                                                                     $(".dialogue").one("click", function () {
                                                                         localStorage.setItem("rangerDead", true);
+                                                                        localStorage.setItem("killerDead", true);
                                                                         insertDialogue("I need to call the police, or get out of here.", "Josef", "../Locations/Inside Hut.html")
                                                                     })
                                                                 })
@@ -64,11 +66,11 @@
                                             $(".dialogue").one("click", function () {
                                                 insertNarration("The killer shoots Josef in the knee, but starts struggling with The Ranger.");
                                                 $(".dialogue").one("click", function () {
-                                                    insertNarration("The Ranger manages to wrestle the gun from the killers hand a pulls the trigger *BANG* The killer falls to the ground");
+                                                    insertNarration("The Ranger manages to wrestle the gun from the killers hand and pulls the trigger *BANG* The killer falls to the ground");
                                                     $(".dialogue").one("click", function () {
                                                         insertDialogue("Flithy animal.", "Ranger");
                                                         $(".dialogue").one("click", function () {
-                                                            insertDialogue("You okay kid? Lets get this wrapped but and call you an ambulance, you got a phone?");
+                                                            insertDialogue("You okay kid? Lets get this wrapped up and call you an ambulance, you got a phone?");
                                                             $(".dialogue").one("click", function () {
                                                                 insertDialogue("On...Charge.", "Josef");
                                                                 $(".dialogue").one("click", function () {
