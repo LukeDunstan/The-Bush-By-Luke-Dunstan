@@ -45,9 +45,11 @@
                 RangerJosefDialogue();
             } else if (localStorage.getItem("unlockFailed") && !localStorage.getItem("killerCame")) {
                 KillerComing();
-            } else if (localStorage.getItem("breathingSuccess")) {
+            } else if (localStorage.getItem("breathingSuccess") && !localStorage.getItem("policeTalked")) {
                 PostLocker();
             }
+
+
             $("#desk").on("click", function () {
                 if (SearchSlots("phone")) {
                     insertDialogue("Nice, I can plug my phone in here, *Click*", "Josef");
@@ -64,13 +66,13 @@
                     })
                 } else {
                     if (localStorage.getItem("isPhoneCharging")) {
-                        if (!localStorage.getItem("killerDead")) {
-                            insertDialogue("Damn the phone hasn't turned on yet, I should look around more", "Josef");
-                        } else if (localStorage.getItem("policeTalked")) {
+                        if (localStorage.getItem("policeTalked")) {
                             insertDialogue("The police are on their way, I need to go", "Josef");
+                        } else if (localStorage.getItem("killerCame")) {
+                            PhoneMessages();
                         }
                         else {
-                            PhoneMessages();
+                            insertDialogue("Damn the phone hasn't turned on yet, I should look around more", "Josef");
                         }
                     } else {
                         insertDialogue("Oh a charger, this will be handy if my phone needs charging", "Josef");
@@ -210,7 +212,7 @@
         }
 
         function PhoneMessages() {
-
+            localStorage.setItem("policeTalked", true);
             insertDialogue("Thank god, the phone has charge. Jeez I have so many messages", "Josef");
             $(".dialogue").one("click", function () {
                 insertNarration('Josef looks at the messages: "Do not go with that man!"~Mum, "Police came around asking about Cody.."~Kate, "Bro i just heard Cody is a serial killer named Tobias?"~George');
@@ -221,7 +223,7 @@
                         $(".dialogue").one("click", function () {
                             insertNarration("Josef dials 000 and gets a hold of the police");
                             $(".dialogue").one("click", function () {
-                                insertDialogue("police, what's the emergency", "Police Line");
+                                insertDialogue("Police, what's the emergency", "Police Line");
                                 $(".dialogue").one("click", function () {
                                     if (localStorage.getItem("rangerDead")) {
                                         insertDialogue("Please help I'm at Rosewell park and I killed a man, he killed the Ranger...", "Josef");
@@ -246,9 +248,9 @@
                                         $(".dialogue").one("click", function () {
                                             insertDialogue("Is your name Josef? We have a unit already on the way to Rosewell park", "Police Line");
                                             $(".dialogue").one("click", function () {
-                                                insertDialogue("Are you okay? are you safe?", "Poice Line");
+                                                insertDialogue("Are you okay? Are you safe?", "Poice Line");
                                                 $(".dialogue").one("click", function () {
-                                                    insertDialogue("I am just scared, I'm in the Rangers hut but there isn't many places to reliably hide and I think the murderer is using here as their base.", "Josef");
+                                                    insertDialogue("I am just scared, I'm in the Rangers hut but there aren't many places to reliably hide and I think the murderer is using here as their base.", "Josef");
                                                     $(".dialogue").one("click", function () {
                                                         insertDialogue("My car is a little ways away, I think I can reach it and escape the park", "Josef");
                                                         $(".dialogue").one("click", function () {
@@ -274,7 +276,6 @@
                     })
                 })
             })
-            localStorage.setItem("policeTalked", true);
         }
 
         function WalkingTimer() {

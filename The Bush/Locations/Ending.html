@@ -1,58 +1,83 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>The Bush by Luke Dunstan</title>
-<link href="../Style Sheets/Main.css" rel="stylesheet" />
-<link href="../Style Sheets/Ending.css" rel="stylesheet" />
-<script src="../JavaScript files/jquery-4.0.0.min.js"></script>
-<script src="../JavaScript files/jquery-ui.js"></script>
-<script src="../JavaScript files/Game_Data.js"></script>
-<script src="../JavaScript files/Game_Helpers.js"></script>
-<script>
-$(document).ready(function() { 
+    <meta charset="utf-8">
+    <title>The Bush by Luke Dunstan</title>
+    <link href="../Style Sheets/Main.css" rel="stylesheet" />
+    <link href="../Style Sheets/Ending.css" rel="stylesheet" />
+    <script src="../JavaScript files/jquery-4.0.0.min.js"></script>
+    <script src="../JavaScript files/jquery-ui.js"></script>
+    <script src="../JavaScript files/Game_Data.js"></script>
+    <script src="../JavaScript files/Game_Helpers.js"></script>
+    <script>
+        $(document).ready(function () {
 
-    $("#backdrop").one("click", function () {window.location.href = "../Locations/index.html"}
-    )
+            $("#backdrop").one("click", function () { window.location.href = "../Locations/index.html" }
+            )
 
-    Ending1();
-    if(localStorage.getItem("killerDead") == true){
-        if (localStorage.getItem("rangerDead") == true) {
-            Ending1();
-        } else {
-            Ending4();
-        }
-    } else if(localStorage.getItem("cellarUnlocked") == true){
-        Ending2();
-    } else {
-        Ending3();
-    }
+            if (localStorage.getItem("killerDead") == true) {
+                if (localStorage.getItem("rangerDead") == true) {
+                    Ending1();
+                } else {
+                    Ending4();
+                }
+            } else if (localStorage.getItem("cellarUnlocked") == true) {
+                Ending2();
+            } else {
+                Ending3();
+            }
 
-    function Ending1(){
-        $("#ending-text").append(
-            '<h1> Epilogue </h1>\
+            function Ending1() {
+                $("#ending-text").append(
+                    '<h1> Epilogue </h1>\
             <p> The Killer is dead but so is the ranger. \
                     Josef does not end up facing any criminal action as he killed in self-defence however Josef must live with killing a friend as well as having someone die for him.\
                     Josef was never the same after this event. </p>\
                     '
-        )
-    }
+                )
+            }
 
 
-    function Ending2(){
+            function Ending2() {
+                $("#ending-text").append(
+                    '<h1> Epilogue </h1>\
+            <p>  Josef leaves the ranger behind in the cellar and escapes.\
+                 Tobias is preoccupied with the ranger and does not notice the police coming for him.\
+                  The ranger is be found dead but Tobias is be arrested.\
+                   Josef must live with the fact that he left someone to die to save himself. </p>\
+                    '
+                )
+            }
 
-    }
+            function Ending3() {
+                $("#ending-text").append(
+                    '<h1> Epilogue </h1>\
+            <p> The player and the ranger escape together.\
+                 The police arrive at the scene with Tobias missing.\
+                  They are both safe but Tobias remains free and ready for his next meal. </p>\
+                    '
+                )
+            }
 
-    function Ending3(){
-
-    }
-})
-</script>
+            function Ending4() {
+                $("#ending-text").append(
+                    '<h1> Epilogue </h1>\
+            <p> The Killer is dead. \
+                    The Ranger does not face criminal action for his actions but he must live with the trauma of killing another \
+                    and Josef is scarred from watching someone he called his friend die in front of him.\
+                    Josef was never the same after this event. </p>\
+                    '
+                )
+            }
+        })
+    </script>
 </head>
+
 <body>
     <div id="backdrop">
         <div id="ending-text">
-                <!-- ending injected here -->
+            <!-- ending injected here -->
         </div>
         <div id="thank-you">
             <p id="thank-text"> Thank you for playing</p>
@@ -60,4 +85,5 @@ $(document).ready(function() {
         </div>
     </div>
 </body>
+
 </html>
