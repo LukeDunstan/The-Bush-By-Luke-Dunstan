@@ -1,4 +1,22 @@
 
+var Sounds =  { 
+    music: "../Sounds/BackTrack.wav",
+    carDoor: "../Sounds/Car Door.wav",
+    chop: "../Sounds/Chop.mp3",
+    cody: "../Sounds/codyFound.wav",
+    doorCreak: "../Sounds/door creak.wav",
+    doorRattle: "../Sounds/door rattle.wav",
+    fall: "../Sounds/fall.wav",
+    gunCock: "../Sounds/gun cock.wav",
+    gunshot: "../Sounds/gunshot.wav",
+    headSlice: "../Sounds/head slice.wav",
+    lockerDoor: "../Sounds/locker door.mp3",
+    paperRustle: "../Sounds/paper rustle.wav",
+    stickBreak: "../Sounds/stick break.mp3",
+    lowBattery: "../Sounds/low-battery.mp3",
+    phoneTone: "../Sounds/phoneTone.mp3"
+}
+
 // define in-game items and where their images are located
 var items = {
     "axe": { "src": "../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png" },
@@ -16,13 +34,15 @@ var backLocations = {
 var fontInterval;
 var lastLocation;
 function init() {
-    lastLocation = localStorage.getItem("currentLocation")
-    if (lastLocation != null) {
-        localStorage.setItem("lastLocation", lastLocation)
-    }
+    lastLocation = localStorage.getItem("currentLocation");
+    var music = new Audio(Sounds.music);
+    music.play();
+    music.loop = true;
+    music.volume = 0.25;
     localStorage.setItem("currentLocation", window.location.href);
     clearInterval(fontInterval)
     InitCommonElements();
+
     // InitCommonEventListeners();
     checkSlots();
     initDragDrop();

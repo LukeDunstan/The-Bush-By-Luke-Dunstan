@@ -17,7 +17,17 @@
         var timer;
         var secondsToWait = 5;
 
+        var doorCreak = new Audio(Sounds.doorCreak);
+        var paperRustle = new Audio(Sounds.paperRustle);
+        var doorRattle = new Audio(Sounds.doorRattle);
+        var carDoor = new Audio(Sounds.carDoor);
+        var cody = new Audio(Sounds.cody);
+        var gunCock = new Audio(Sounds.gunCock);
+        var lockerDoor = new Audio(Sounds.lockerDoor);
+        var phoneTone = new Audio(Sounds.phoneTone);
+
         $(document).ready(function () {
+            doorCreak.playbackRate = 1.8;
             if (localStorage.getItem("killerCame") && !localStorage.getItem("killerDead")) {
                 $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
             }
@@ -36,6 +46,7 @@
             )
 
             if (CheckIfFirstTime()) {
+                doorCreak.play();
                 if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
                     insertDialogue("Hmm, no one's here", "Josef")
                 } else if (SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
@@ -57,6 +68,7 @@
                         localStorage.setItem("isPhoneCharging", "true");
                         RemoveFromInventory("phone");
                         insertDialogue("What's this?", "Josef");
+                        paperRustle.play();
                         $(".dialogue").one("click", function () {
                             insertNarration("You see a map on the desk detailing your trip with Cody");
                             $(".dialogue").one("click", function () {
@@ -86,10 +98,12 @@
                 } else if (localStorage.getItem("rangerTalked")) {
                     insertDialogue("I already let the ranger out, we need to escape", "Josef");
                 } else if (localStorage.getItem("isPhoneCharging")) {
+                    doorRattle.play();
                     insertDialogue("*Thump Thump*... *Muffled pleas for help*", "Cody?");
                     $(".dialogue").one("click", function () {
                         insertDialogue("Cody are you in there?!? I'll try and get this open", "Josef");
                         $(".dialogue").one("click", function () {
+                            doorRattle.play();
                             insertNarration("The doors are locked shut.")
                             $(".dialogue").one("click", function () {
                                 if (hasAxe) {
@@ -110,6 +124,7 @@
                 if (!iskillerComing) {
                     insertDialogue("This could be a useful hiding spot if needed", "Josef");
                 } else {
+                    lockerDoor.play();
                     clearInterval(KillerTimer);
                     KillerWalksIn();
                 }
@@ -146,6 +161,7 @@
         function KillerWalksIn() {
             localStorage.setItem("killerCame", true);
             insertNarration("A hooded figure walks into the hut and over to the desk, placing a car battery on top and sighing as he takes his hood off revealing... Cody?!");
+            cody.play();
             $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
             $(".dialogue").one("click", function () {
                 if (!localStorage.getItem("cellarUnlocked")) {
@@ -153,6 +169,7 @@
                     $(".dialogue").one("click", function () {
                         insertDialogue("Damn he's been here. He's going to cook up nicely when I find him", "Cody");
                         $(".dialogue").one("click", function () {
+                            gunCock.play();
                             insertNarration("Cody cocks a gun in his hand and sets back out to look for Josef");
                             $(".dialogue").one("click", function () {
                                 PostLocker();
@@ -164,6 +181,7 @@
                     $(".dialogue").one("click", function () {
                         insertDialogue("Damn he's got out, now I have two meals to look for", "Cody");
                         $(".dialogue").one("click", function () {
+                            gunCock.play();
                             insertNarration("Cody cocks a gun in his hand and set back outside when he hears a noise coming from the locker");
                             $(".dialogue").one("click", function () {
                                 insertDialogue("Still here I see", "Cody");
@@ -178,6 +196,7 @@
         }
 
         function KillerComing() {
+            carDoor.play();
             insertNarration("*Thump* A car door closes outside");
             $(".dialogue").one("click", function () {
                 if (localStorage.getItem("rangerTalked")) {
@@ -222,6 +241,7 @@
                     $(".dialogue").one("click", function () {
                         insertDialogue("Okay, call the police", "Josef");
                         $(".dialogue").one("click", function () {
+                            phoneTone.play();
                             insertNarration("Josef dials 000 and gets a hold of the police");
                             $(".dialogue").one("click", function () {
                                 insertDialogue("Police, what's the emergency", "Police Line");
@@ -286,6 +306,8 @@
                 $(".dialogue").one("click", function () { window.location.href = "../Locations/Inside Hut-Killer-Event.html"; })
             }
         }
+
+
     </script>
 </head>
 

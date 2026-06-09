@@ -22,6 +22,7 @@
             var axePosPercent;
             var goingUp = true;
             var strikes = 0;
+            var chop = new Audio(Sounds.chop);
 
 
             InitDialogueBox();
@@ -30,6 +31,7 @@
 
             function hit(e) {
                 if (e.keyCode == keyCode) {
+                    chop.play();
                     if (axePosPercent > 35 && axePosPercent < 55) {
                         localStorage.setItem("cellarUnlocked", true);
                         insertNarration("*CRASH* the lock broke!", "../Locations/Inside Hut.html");

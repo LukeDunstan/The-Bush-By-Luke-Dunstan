@@ -13,7 +13,7 @@
     <script>
         $(document).ready(function () {
             init();
-
+            var lowBattery = new Audio(Sounds.lowBattery);
             if (CheckIfFirstTime()) {
                 insertDialogue("I should look around and see if I can get help, maybe try and call someone if I can find my phone.", "Josef");
             }
@@ -30,6 +30,7 @@
                             "drop", function (e, ui) {
                                 console.log("dropped")
                                 if (ui.draggable[0].id == "phone") {
+                                    lowBattery.play();
                                     insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Joseph");
                                     $(".inventory-slot").off("drop");
 

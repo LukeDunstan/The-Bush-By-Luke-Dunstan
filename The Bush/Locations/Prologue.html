@@ -13,6 +13,10 @@
     <script>
         $(document).ready(function () {
             $("#backdrop").on("click", function () {window.location.href = "./Clearing.html"})
+            var fall = new Audio(Sounds.fall);
+            var stickBreak = new Audio(Sounds.stickBreak);
+            fall.play();
+            stickBreak.play();
         })
     </script>
 </head>
