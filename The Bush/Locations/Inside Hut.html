@@ -18,7 +18,7 @@
         var secondsToWait = 5;
 
         $(document).ready(function () {
-            if (localStorage.getItem("killerCame")) {
+            if (localStorage.getItem("killerCame") && !localStorage.getItem("killerDead")) {
                 $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
             }
 
@@ -186,6 +186,7 @@
                     insertDialogue("Who is that? I should probably hide", "Josef");
                 }
                 $(".dialogue").one("click", function () {
+                    localStorage.setItem("killerCame", true);
                     iskillerComing = true;
                     timer = 0;
                     KillerTimer = setInterval(WalkingTimer, 1000);
