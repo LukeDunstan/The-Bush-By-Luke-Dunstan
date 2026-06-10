@@ -11,10 +11,12 @@
     <script src="../JavaScript files/Game_Data.js"></script>
     <script src="../JavaScript files/Game_Helpers.js"></script>
     <script>
+        var pullAway = new Audio(Sounds.pullAway);
         $(document).ready(function () {
 
-            $("#backdrop").one("click", function () { window.location.href = "../Locations/index.html" }
-            )
+            $("#backdrop").one("click", function () { 
+                localStorage.clear();
+                window.location.href = "../Locations/index.html" })
 
             if (localStorage.getItem("killerDead") == true) {
                 if (localStorage.getItem("rangerDead") == true) {
@@ -40,6 +42,7 @@
 
 
             function Ending2() {
+                pullAway.play();
                 $("#ending-text").append(
                     '<h1> Epilogue </h1>\
             <p>  Josef leaves the ranger behind in the cellar and escapes.\
@@ -51,6 +54,7 @@
             }
 
             function Ending3() {
+                pullAway.play();
                 $("#ending-text").append(
                     '<h1> Epilogue </h1>\
             <p> The player and the ranger escape together.\

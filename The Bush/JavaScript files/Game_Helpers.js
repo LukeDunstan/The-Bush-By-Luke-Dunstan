@@ -1,6 +1,7 @@
 
 var Sounds =  { 
-    music: "../Sounds/BackTrack.wav",
+    lowIntensityMusic: "../Sounds/BackTrack.wav",
+    highIntensityMusic: "../Sounds/higher intensity backtrack.mp3",
     carDoor: "../Sounds/Car Door.wav",
     chop: "../Sounds/Chop.mp3",
     cody: "../Sounds/codyFound.wav",
@@ -14,8 +15,12 @@ var Sounds =  {
     paperRustle: "../Sounds/paper rustle.wav",
     stickBreak: "../Sounds/stick break.mp3",
     lowBattery: "../Sounds/low-battery.mp3",
-    phoneTone: "../Sounds/phoneTone.mp3"
+    phoneTone: "../Sounds/phoneTone.mp3",
+    pullAway: "../Sounds/pull-away.mp3",
+    carStart: "../Sounds/car-start-up.mp3"
 }
+
+
 
 // define in-game items and where their images are located
 var items = {
@@ -35,14 +40,10 @@ var fontInterval;
 var lastLocation;
 function init() {
     lastLocation = localStorage.getItem("currentLocation");
-    var music = new Audio(Sounds.music);
-    music.play();
-    music.loop = true;
-    music.volume = 0.25;
     localStorage.setItem("currentLocation", window.location.href);
     clearInterval(fontInterval)
     InitCommonElements();
-
+    initMusic();
     // InitCommonEventListeners();
     checkSlots();
     initDragDrop();
@@ -139,6 +140,18 @@ function initDragDrop() {
         }
     })
     console.log('dragdrop initialised')
+}
+
+function initMusic() {
+    if (localStorage.getItem("killerComing")){
+        var music = new Audio(Sounds.highIntensityMusic);
+    } else {
+        var music = new Audio(Sounds.lowIntensityMusic);
+    }
+    
+    music.play();
+    music.loop = true;
+    music.volume = 0.25;
 }
 
 //check slots for item data

@@ -20,6 +20,9 @@
             var isDown = false;
             var headIconElement = $("#head");
             var thisDeltaTime;
+
+            var thump = new Audio(Sounds.fall);
+
             $(document).one('keydown', EDown);
             InitDialogueBox();
 
@@ -36,7 +39,7 @@
                 } else {
                     timer -= 1 * thisDeltaTime;
                 }
-                
+
                 MoveHead();
                 gameTimer += 1 * thisDeltaTime;
                 console.log(gameTimer);
@@ -44,9 +47,10 @@
                     insertDialogue("I knew there was someone in here", "Cody", '../Locations/Death.html');
                     localStorage.setItem("deathRespawn", "../Minigames/Breathing.html");
                     clearInterval(timerInterval);
-                } else if (gameTimer >= minigameLength){
+                } else if (gameTimer >= minigameLength) {
                     clearInterval(timerInterval);
                     localStorage.setItem("breathingSuccess", true);
+                    thump.play();
                     insertNarration("A sound is heard outside in the distance, Cody goes out to investigate", "../Locations/Inside Hut.html");
                 }
             }
@@ -101,10 +105,10 @@
             <h1 class="MG-instructions"> Control Your breathing so you breathe quietly, Hold "SPACE" to hold your
                 breath. Keep the head in the green.</h1>
             <figure id="car-battery-fig"></figure>
-            <figure id="desk-fig"> <img id="desk"  src="../Images/desk.png"></figure>
-            <figure id="cellar-fig"> <img id="cellar"  src="../Images/cellar-door-cropped.png">
+            <figure id="desk-fig"> <img id="desk" src="../Images/desk.png"></figure>
+            <figure id="cellar-fig"> <img id="cellar" src="../Images/cellar-door-cropped.png">
             </figure>
-            <figure id="locker-fig"> <img id="locker"  src="../Images/locker.png"></figure>
+            <figure id="locker-fig"> <img id="locker" src="../Images/locker.png"></figure>
         </div>
 
         <div id="bar" class="ui ui1">

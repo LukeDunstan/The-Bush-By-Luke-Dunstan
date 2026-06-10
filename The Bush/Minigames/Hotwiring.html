@@ -14,10 +14,13 @@
         var secondsTilDeath = 10;
         var timer = 0;
         var gameInterval;
+
+        var carStart = new Audio(Sounds.carStart);
+
         $(document).ready(function () {
             InitDialogueBox()
             HotwiringDraw();
-            insertNarration("connect the wires to complete the circuit and turn on the car before Cody catches you")
+            insertNarration("Connect the correct wires to complete the circuit and turn on the car before Cody catches you")
             $(".dialogue").one("click", function () {
                 gameInterval = setInterval(MainLoop, 100);
             })
@@ -75,6 +78,7 @@
         }
 
         function BothConnected() {
+            carStart.play();
             insertDialogue("Sweet it started! Let's get out of here", "Josef", "../Locations/Ending.html");
         }
 
