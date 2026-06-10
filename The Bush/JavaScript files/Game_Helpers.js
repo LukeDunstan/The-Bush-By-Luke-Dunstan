@@ -24,7 +24,7 @@ var Sounds =  {
 
 // define in-game items and where their images are located
 var items = {
-    "axe": { "src": "../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png" },
+    "axe": { "src": "../Images/axe.png" },
     "phone": { "src": "../Images/phone.png" },
     "car-battery": { "src": "../Images/car-battery.png" },
 };

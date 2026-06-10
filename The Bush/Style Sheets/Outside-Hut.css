@@ -1,24 +1,16 @@
 #backdrop {
-    background-image: url("../Images/Ranger-hut.jpg");
+    background-image: url("../Images/rangers-hut.png");
     background-repeat: round;
     background-size: contain;
 }
 
-#axe{ 
-    transform: rotate(-90deg);
-}
-
 #axe-fig {
-    width: 6%;
-    left: 30%;
-    top: 78%;
+    left: 31%;
+    top: 80%;
 }
 
 #ranger-door-fig {
-  left: 44.5%;
-  top: 64%;
-}
-
-#ranger-door {
-    width: 71% !important;
+  left: 40.3%;
+  top: 68.8%;
+  width: 5.8%;
 }

@@ -46,6 +46,7 @@ img {
     margin: auto;
     position: relative;
     z-index: 10;
+    object-fit: contain;
 }
 
 .item:hover {
@@ -90,6 +91,7 @@ figure{
     width: 75%;
 }
 
+
 .dialogue {
     grid-area: ui;
     display: grid;
@@ -107,7 +109,7 @@ figure{
     color: white;
     margin-left: 2%;
     margin-top: 0px;
-    overflow: scrol;
+    overflow: scroll;
     height: 50%;
 }
 
@@ -133,4 +135,16 @@ figure{
 #continue-text {
   text-align: end;
   margin-right: 6%;
+}
+
+#axe {
+    width: 60%;
+}
+
+.inventory-slot #axe{
+    width: 50%;
+}
+
+.inventory-slot #phone{
+    width: 80%;
 }
