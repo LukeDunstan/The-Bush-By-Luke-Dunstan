@@ -1,5 +1,5 @@
 
-var Sounds =  { 
+var Sounds = {
     lowIntensityMusic: "../Sounds/BackTrack.wav",
     highIntensityMusic: "../Sounds/higher intensity backtrack.mp3",
     carDoor: "../Sounds/Car Door.wav",
@@ -22,10 +22,11 @@ var Sounds =  {
 
 //portrait images
 var portraits = {
-    Josef : "../Images/josef.png",
-    Ranger : "../Images/Ranger.png",
+    Josef: "../Images/josef.png",
+    Ranger: "../Images/Ranger.png",
     Killer: "../Images/killer.png",
-    Cody: "../Images/cody.png"
+    Cody: "../Images/cody.png",
+    undefined: "../Images/undefined.png"
 }
 
 // define in-game items and where their images are located
@@ -151,12 +152,12 @@ function initDragDrop() {
 }
 
 function initMusic() {
-    if (localStorage.getItem("killerComing")){
+    if (localStorage.getItem("killerComing")) {
         var music = new Audio(Sounds.highIntensityMusic);
     } else {
         var music = new Audio(Sounds.lowIntensityMusic);
     }
-    
+
     music.play();
     music.loop = true;
     music.volume = 0.25;
@@ -217,15 +218,19 @@ function CheckIfTrueInStorage(ItemToCheck) {
 function insertDialogue(dialogueString, speakerName, href) {
     $(".ui1").hide();
     $(".dialogue").show();
-    if (!(portraits[speakerName] == undefined)) {
-        $(".portrait-img").attr("src", portraits[speakerName])
+    console.log(portraits[speakerName])
+    $(".portrait-img").attr("src", portraits[speakerName])
+    $(".portrait-img").show();
+
+    if (portraits[speakerName] == undefined) {
+        $(".portrait-img").hide();
     }
     $(".speaker-heading").text(speakerName);
     $(".dialogue-text").text(dialogueString);
     $(".dialogue").one(
         "click", function () {
             $(".dialogue").hide();
-            $(".portrait-img").attr("src", "undefined")
+            $(".portrait-img").hide();
             if (href != null && href != undefined) {
                 window.location.href = href;
             } else {
@@ -239,9 +244,9 @@ function insertDialogue(dialogueString, speakerName, href) {
 // as I was having trouble when switching between firefox and safari on my PC and macbook respectively.
 var lastTime;
 var deltaTime;
-function GetTimeBetweenIntervals(){
-    deltaTime = (Date.now()/1000) - lastTime;
-    lastTime = Date.now()/1000;
+function GetTimeBetweenIntervals() {
+    deltaTime = (Date.now() / 1000) - lastTime;
+    lastTime = Date.now() / 1000;
     if (deltaTime < 1 && deltaTime > 0) {
         return deltaTime;
     } else {

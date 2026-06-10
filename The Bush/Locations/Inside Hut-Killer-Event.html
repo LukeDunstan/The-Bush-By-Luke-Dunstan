@@ -12,10 +12,17 @@
     <script src="../JavaScript files/Game_Helpers.js"></script>
     <script>
         $(document).ready(function () {
+
+            var gunshot = new Audio(Sounds.gunshot);
+            gunshot.volume = .5;
+            var gunCock = new Audio(Sounds.gunCock);
+            var headSlice = new Audio(Sounds.headSlice);
+
             InitDialogueBox();
             
             if (localStorage.getItem("cellarUnlocked")) {
                 insertNarration("The killer stands before Josef and The Ranger, cocking a gun and aiming it at Josef")
+                gunCock.play();
                 $(".dialogue").one("click", function () {
                     insertNarration("Before Josef can react, The Ranger yells and rushes the killer");
                     $(".dialogue").one("click", function () {
@@ -26,14 +33,16 @@
                                 insertNarration("Does he (use the corresponding keyboard keys):\
                                 A) Take the opportunity or \
                                 B) Try to rush in himself");
-                                $(".continue").remove();
+                                $(".continue").hide();
                                 $(".dialogue").off("click");
                                 $(document).one("keydown", function (event) {
+                                    $(".continue").show();
                                     //Josef Kills killer
                                     if (event.key == "A" || event.key == "a") {
                                         insertNarration("Josef, taking advantage of the distraction, charges in with his axe for a swing.");
                                         $(".dialogue").one("click", function () {
                                             insertNarration("Josef hits the killer in the side of the neck, embedding the axe and killing the killer.");
+                                            headSlice.play();
                                             $(".dialogue").one("click", function () {
                                                 insertDialogue("Oh god, what have I done. You okay Ranger?", "Josef");
                                                 $(".dialogue").one("click", function () {
@@ -41,15 +50,17 @@
                                                     $(".dialogue").one("click", function () {
                                                         insertNarration("Josef looks back toward The Ranger, who is now holding his chest and trying to keep the blood from coming out.");
                                                         $(".dialogue").one("click", function () {
-                                                            insertDialogue("Ouch, he got me kid. Tell my wife I love her, I'm glad you're safe.");
+                                                            insertDialogue("Ouch, he got me kid. Tell my wife I love her, I'm glad you're safe.", "Ranger");
                                                             $(".dialogue").one("click", function () {
                                                                 insertNarration("He smiles a weak smile at Josef as he crumples to the ground, dead.");
                                                                 $(".dialogue").one("click", function () {
-                                                                    insertDialogue("No No please, it should have been me!");
+                                                                    insertDialogue("No No please, it should have been me!", "Josef");
                                                                     $(".dialogue").one("click", function () {
                                                                         localStorage.setItem("rangerDead", true);
                                                                         localStorage.setItem("killerDead", true);
-                                                                        insertDialogue("I need to call the police, or get out of here.", "Josef", "../Locations/Inside Hut.html")
+                                                                        localStorage.removeItem("killerEvent");
+                                                                        insertDialogue("I need to call the police and get out of here.", "Josef", "../Locations/Inside Hut.html")
+                                                                        
                                                                     })
                                                                 })
                                                             })
@@ -65,8 +76,10 @@
                                             insertDialogue("Leave him alone!", "Josef");
                                             $(".dialogue").one("click", function () {
                                                 insertNarration("The killer shoots Josef in the knee, but starts struggling with The Ranger.");
+                                                gunshot.play();
                                                 $(".dialogue").one("click", function () {
                                                     insertNarration("The Ranger manages to wrestle the gun from the killers hand and pulls the trigger *BANG* The killer falls to the ground");
+                                                    gunshot.play();
                                                     $(".dialogue").one("click", function () {
                                                         insertDialogue("Flithy animal.", "Ranger");
                                                         $(".dialogue").one("click", function () {
@@ -76,11 +89,11 @@
                                                                 $(".dialogue").one("click", function () {
                                                                     insertNarration("After bandaging up Josef's knee The Ranger walks over to the desk and grabs Josef's phone from charge");
                                                                     $(".dialogue").one("click", function () {
-                                                                        insertDialogue("You have loads of messages, probably best to look at those once we're safe.");
+                                                                        insertDialogue("You have loads of messages, probably best to look at those once we're safe.", "Ranger");
                                                                         $(".dialogue").one("click", function () {
                                                                             insertNarration("the Ranger calls the ambulance and the police to find that they're already on their way");
                                                                             $(".dialogue").one("click", function () {
-                                                                                insertDialogue("Maybe those messages are important now, the authorities are on their way");
+                                                                                insertDialogue("Maybe those messages are important now, the authorities are on their way", "Ranger");
                                                                                 $(".dialogue").one("click", function () {
                                                                                     insertNarration("The Ranger hands Josef the phone. Josef looks and find messages from his famliy and some friends");
                                                                                     $(".dialogue").one("click", function () {
@@ -89,6 +102,7 @@
                                                                                             localStorage.setItem("killerDead", true);
                                                                                             localStorage.setItem("rangerDead", false);
                                                                                             insertDialogue("Cody was the killer?", "Josef", "../Locations/Ending.html");
+                                                                                            localStorage.setItem("killerEvent", false);
                                                                                         })
                                                                                     })
                                                                                 })
