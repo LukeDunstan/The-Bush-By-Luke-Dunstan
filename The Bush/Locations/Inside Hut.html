@@ -75,7 +75,7 @@
                         $(".dialogue").one("click", function () {
                             insertNarration("You see a map on the desk detailing your trip with Cody");
                             $(".dialogue").one("click", function () {
-                                insertDialogue("How are our plans for the trip are here? Maybe Cody has been here and is looking for me with the Ranger.");
+                                insertDialogue("How are our plans for the trip are here? Maybe Cody has been here and is looking for me with the Ranger.", "Josef");
                             })
                         })
                     })
@@ -112,7 +112,7 @@
                                 if (hasAxe) {
                                     insertDialogue("I can use the axe to break to door, Step back", "Josef", "../Minigames/UnlockCellar.html");
                                 } else if (localStorage.getItem("axeBroken")) {
-                                    insertDialogue("I'm sorry, I cant open the door!");
+                                    insertDialogue("I'm sorry, I cant open the door!", "Josef");
                                 } else {
                                     insertDialogue("I need something heavy to break the door, there was an axe outside I could use", "Josef");
                                 }
