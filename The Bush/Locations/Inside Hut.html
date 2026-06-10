@@ -39,7 +39,7 @@
                 "drop", function (e, ui) {
                     console.log("dropped")
                     if (ui.draggable[0].id == "car-battery") {
-                        insertDialogue("Now I can hotwire the car and get out of here", "Joseph");
+                        insertDialogue("Now I can hotwire the car and get out of here", "Josef");
                         $(".inventory-slot").off("drop");
                     }
                 }
@@ -52,7 +52,10 @@
                 } else if (SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
                     insertDialogue("Hmm, no one's here. I should really find somewhere to charge my phone", "Josef")
                 }
-            } else if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
+            }   else if (localStorage.getItem("killerEvent")){
+                window.location.href = "../Locations/Inside Hut-Killer-Event.html";
+            }
+             else if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
                 RangerJosefDialogue();
             } else if (localStorage.getItem("killerComing") && !localStorage.getItem("killerCame")) {
                 KillerComing();
@@ -171,6 +174,7 @@
                         $(".dialogue").one("click", function () {
                             gunCock.play();
                             insertNarration("Cody cocks a gun in his hand and sets back out to look for Josef");
+                            localStorage.setItem("killerCame", true);
                             $(".dialogue").one("click", function () {
                                 PostLocker();
                             })
@@ -187,6 +191,7 @@
                             $(".dialogue").one("click", function () {
                                 insertDialogue("Still here I see", "Cody");
                                 $(".dialogue").one("click", function () {
+                                    localStorage.setItem("killerCame", true);
                                     insertNarration("Cody starts walking over to the locker", "../Minigames/Breathing.html");
                                 })
                             })
@@ -194,7 +199,7 @@
                     })
                 }
             })
-            localStorage.setItem("killerCame", true);
+            
         }
 
         function KillerComing() {
@@ -306,7 +311,8 @@
         function WalkingTimer() {
             timer += 1;
             if (timer >= secondsToWait) {
-                insertDialogue("Aha, I found you", "Unknown");
+                insertDialogue("Aha, I found you", "Killer");
+                localStorage.setItem("killerEvent", true);
                 localStorage.setItem("killerCame", true);
                 $(".dialogue").one("click", function () { window.location.href = "../Locations/Inside Hut-Killer-Event.html"; })
             }

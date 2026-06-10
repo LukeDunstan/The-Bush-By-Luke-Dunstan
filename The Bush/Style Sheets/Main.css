@@ -19,8 +19,11 @@ body {
 
 #portrait {
     position: absolute;
+    z-index: 0;
+    top: -186%;
+    width: 9%;
+    left: 2%;
 }
-
 p {
     align-self: center;
 }

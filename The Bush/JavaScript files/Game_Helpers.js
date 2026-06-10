@@ -20,7 +20,13 @@ var Sounds =  {
     carStart: "../Sounds/car-start-up.mp3"
 }
 
-
+//portrait images
+var portraits = {
+    Josef : "../Images/josef.png",
+    Ranger : "../Images/Ranger.png",
+    Killer: "../Images/killer.png",
+    Cody: "../Images/cody.png"
+}
 
 // define in-game items and where their images are located
 var items = {
@@ -60,6 +66,7 @@ function InitCommonElements() {
             <div class='inventory-slot' id='slot4'> </div> \
         </div> \
         <div class='dialogue ui ui2'> \
+            <figure id= 'portrait'> <img class='portrait-img' src='undefined' > </figure>\
             <h2 class=speaker-heading></h2> \
             <p class='continue'> Click to continue </p> \
             <p class='dialogue-text'></p> \
@@ -83,6 +90,7 @@ function CheckIfFirstTime() {
 function InitDialogueBox() {
     $("#backdrop").append(
         "<div class='dialogue ui ui2'> \
+        <figure id= 'portrait'> <img class='portrait-img' src='undefined' ></figure>\
             <h2 class=speaker-heading></h2> \
             <p class='continue'> Click to continue </p> \
             <p class='dialogue-text'></p> \
@@ -209,12 +217,16 @@ function CheckIfTrueInStorage(ItemToCheck) {
 function insertDialogue(dialogueString, speakerName, href) {
     $(".ui1").hide();
     $(".dialogue").show();
+    if (!(portraits[speakerName] == undefined)) {
+        $(".portrait-img").attr("src", portraits[speakerName])
+    }
     $(".speaker-heading").text(speakerName);
     $(".dialogue-text").text(dialogueString);
     $(".dialogue").one(
         "click", function () {
             $(".dialogue").hide();
-            if (href != null) {
+            $(".portrait-img").attr("src", "undefined")
+            if (href != null && href != undefined) {
                 window.location.href = href;
             } else {
                 $(".ui1").show();
@@ -241,13 +253,15 @@ function GetTimeBetweenIntervals(){
 function insertNarration(dialogueString, href) {
     $(".ui1").hide();
     $(".speaker-heading").hide();
+    $(".portrait-img").hide();
     $(".dialogue").show();
     $(".dialogue-text").text(dialogueString);
     $(".dialogue").one(
         "click", function () {
             $(".speaker-heading").show();
+            $(".portrait-img").show();
             $(".dialogue").hide();
-            if (href != null) {
+            if (href != null && href != undefined && href != "undefined") {
                 window.location.href = href;
             } else {
                 $(".ui1").show();

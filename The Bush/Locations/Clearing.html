@@ -22,7 +22,7 @@
 
             $("#bag").on("click", function () {
                 if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
-                    insertDialogue("Bruh, my things are every where.. I could've sworn I left my phone in the front pocket. *bump* Oh there is is.", "Joseph");
+                    insertDialogue("Bruh, my things are every where.. I could've sworn I left my phone in the front pocket. *bump* Oh there is is.", "Josef");
                     $(".dialogue").one("click", function () {
                         $("#phone-fig").append("<img class='item' id='phone' src='../Images/phone.png'>");
                         initDragDrop();
@@ -31,7 +31,7 @@
                                 console.log("dropped")
                                 if (ui.draggable[0].id == "phone") {
                                     lowBattery.play();
-                                    insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Joseph");
+                                    insertDialogue("Out of charge?!?! I'll have to find somewhere to charge it.", "Josef");
                                     $(".inventory-slot").off("drop");
 
                                 }
@@ -39,14 +39,14 @@
                         )
                     });
                 } else {
-                    insertDialogue("There's nothing more for me in here right now", "Joseph");
+                    insertDialogue("There's nothing more for me in here right now", "Josef");
                 }
 
             })
-            $("#fire").on("click", function () { insertDialogue("Being cold is the last of my worries", "Josef") })
-            $("#pants").on("click", function () { insertDialogue("I'm not sure how those will help me now", "Josef") })
-            $("#car-path").on("click", function () { insertDialogue("I need to get out of here, maybe I can hot wire the car..", "Joseph", "./Car.html") });
-            $("#hut-path").on("click", function () { insertDialogue("look! a house with a light on.", "Joseph", "./Outside Hut.html") });
+            $("#fire").on("click", function () { insertDialogue("Being cold is the last of my worries", "Josef") });
+            $("#pants").on("click", function () { insertDialogue("I'm not sure how those will help me now", "Josef") });
+            $("#car-path").on("click", function () { insertDialogue("I need to get out of here, maybe I can hot wire the car..", "Josef", "./Car.html") });
+            $("#hut-path").on("click", function () { insertDialogue("look! a house with a light on.", "Josef", "./Outside Hut.html") });
         })
     </script>
 </head>
