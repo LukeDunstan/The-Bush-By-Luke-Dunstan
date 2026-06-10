@@ -26,7 +26,7 @@
 
 
             InitDialogueBox();
-            setInterval(MoveAxe, 1)
+            setInterval(MoveAxe, 1);
             $(document).on('keydown', hit);
 
             function hit(e) {
@@ -73,12 +73,16 @@
 
 <body>
     <div id="backdrop">
-        <div class=stage>
+        <div id=stage>
             <h1 class="MG-instructions"> Press "SPACE" when the axe is in the green, you get 3 attempts.</h1>
+             <figure id="desk-fig"> <img id="desk" src="../Images/desk.png"></figure>
+            <figure id="cellar-fig"> <img id="cellar" src="../Images/cellar.png">
+            </figure>
+            <figure id="locker-fig"> <img id="locker" src="../Images/locker.png"></figure>
         </div>
         <div id="bar" class="ui ui1">
             <img id="axe-icon"
-                src="../Images/old-rust-dirty-dark-gray-ax-with-brown-wooden-handle-isolated-with-clipping-path-in-format-png.png">
+                src="../Images/axe.png">
             <div id="red1"></div>
             <div id="green"></div>
             <div id="red2"></div>

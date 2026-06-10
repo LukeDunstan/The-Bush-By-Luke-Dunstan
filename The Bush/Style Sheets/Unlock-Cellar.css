@@ -1,5 +1,5 @@
 #backdrop {
-    background-image: url("../Images/cellar door.jpg");
+    background-image: url("../Images/inside-hut.png");
     background-size: contain;
     background-repeat: round;
 }
@@ -24,10 +24,10 @@
 
 #axe-icon {
     position: absolute;
-  width: 10%;
-  transform: rotate(90deg);
-  left: -4%;
-  top: 39%;
+  width: 5%;
+  transform: rotate(180deg);
+  left: 4%;
+  top: 2%;
 }
 
 #red1 {
@@ -50,4 +50,22 @@
     background-color: rgb(0, 206, 0);
     grid-column: 2;
 
+}
+
+#locker-fig {
+    left: 12%;
+    width: 17%;
+    top: 36%;
+}
+
+#desk-fig {
+    width: 30%;
+    top: 56%;
+    left: 53%;
+}
+
+#cellar-fig {
+    width: 20%;
+    left: 32%;
+    top: 50%;
 }

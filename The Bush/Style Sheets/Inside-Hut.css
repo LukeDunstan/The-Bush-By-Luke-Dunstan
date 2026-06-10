@@ -1,29 +1,29 @@
 #backdrop {
-    background-image: url("../Images/Inside-Hut.jpg");
+    background-image: url("../Images/inside-hut.png");
     background-repeat: round;
     background-size: contain;
 }
 
 #locker-fig {
-    left: 62%;
-    width: 25%;
-    top: 38%;
-}
-
-#cellar-fig {
-    width: 20%;
-    left: 45%;
-    top: 52%;
+    left: 12%;
+    width: 17%;
+    top: 36%;
 }
 
 #desk-fig {
     width: 30%;
     top: 56%;
-    left: 15%;
+    left: 53%;
+}
+
+#cellar-fig {
+    width: 20%;
+    left: 32%;
+    top: 50%;
 }
 
 #car-battery-fig {
-  left: 18%;
-  top: 50%;
+  left: 57%;
+  top: 52%;
   width: 6%;
 }
