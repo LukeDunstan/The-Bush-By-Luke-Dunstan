@@ -1,17 +1,16 @@
 #backdrop {
-    background-image: url(../Images/car-dash.jpg);
-    background-size: contain;
-    background-repeat: round;
+    background-image: url(../Images/inside-car.png);
+    background-size: cover;
 }
 
 #wire-box-fig {
-left: 76%;
-top: 61%;
+left: 77%;
+top: 60.5%;
 width: 3.5%;
 }
 
 #power-button-fig {
-  left: 80.5%;
-  top: 61%;
+  left: 81.5%;
+  top: 60.5%;
   width: 2%;
 }
