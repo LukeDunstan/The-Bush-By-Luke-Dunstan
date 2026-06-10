@@ -1,11 +1,17 @@
+#hub {
+    position: absolute;
+    width: 80.1%;
+}
+
 #power-line-start {
     top: 20%;
 }
 
 #power-line-end {
-    left: 97.5%;
+    left: 94%;
     top: 60%;
     z-index: 3;
+    transform: rotate(180deg);
 }
 
 #ignition-line-start {
@@ -13,7 +19,16 @@
 }
 
 #ignition-line-end {
-    left: 97.5%;
+    left: 94%;
     top: 20%;
     z-index: 3;
+    transform: rotate(180deg);
+}
+
+.plug-fig {
+    width: 4%;
+}
+
+.start {
+    left: 2.6%;
 }

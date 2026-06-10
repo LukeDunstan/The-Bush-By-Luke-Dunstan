@@ -19,10 +19,11 @@
 
         $(document).ready(function () {
             InitDialogueBox()
-            HotwiringDraw();
+            
             insertNarration("Connect the correct wires to complete the circuit and turn on the car before Cody catches you")
             $(".dialogue").one("click", function () {
                 gameInterval = setInterval(MainLoop, 100);
+                HotwiringDraw();
             })
         })
 
@@ -83,10 +84,10 @@
         }
 
         function SetLinePos(lineID, xStart, yStart, xEnd, yEnd) {
-            $("#" + lineID).attr("x1", xStart + 12);
-            $("#" + lineID).attr("y1", yStart + 12);
-            $("#" + lineID).attr("x2", xEnd + 12);
-            $("#" + lineID).attr("y2", yEnd + 12);
+            $("#" + lineID).attr("x1", xStart + 40);
+            $("#" + lineID).attr("y1", yStart + 18);
+            $("#" + lineID).attr("x2", xEnd + 30);
+            $("#" + lineID).attr("y2", yEnd + 18);
         }
 
         function GetNumberFromPXAttr(selector, attr) {
@@ -97,20 +98,21 @@
 
 <body>
     <div id="backdrop">
+        <img id="hub" src="../Images/hotwire background.png">
         <div class=stage style="position: relative;">
             <svg height="0" width="0" style="position: absolute;">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:red;stroke-width:10" id="power-line"></line>
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(137, 34, 255);stroke-width:10" id="ignition-line">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:red;stroke-width:14" id="power-line"></line>
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:#0000ff;stroke-width:14" id="ignition-line">
                 </line>
 
             </svg>
-            <figure id="power-line-start" class="plug-fig start"> <img class="plug" src="../Images/power-button.png">
+            <figure id="power-line-start" class="plug-fig start"> <img class="plug" src="../Images/red connector.png">
             </figure>
-            <figure id="power-line-end" class="plug-fig end"> <img class="plug" src="../Images/power-button.png">
+            <figure id="power-line-end" class="plug-fig end"> <img class="plug" src="../Images/red connector.png">
             </figure>
-            <figure id="ignition-line-start" class="plug-fig start"> <img class="plug" src="../Images/power-button.png">
+            <figure id="ignition-line-start" class="plug-fig start"> <img class="plug" src="../Images/blue connector.png">
             </figure>
-            <figure id="ignition-line-end" class="plug-fig end"> <img class="plug" src="../Images/power-button.png">
+            <figure id="ignition-line-end" class="plug-fig end"> <img class="plug" src="../Images/blue connector.png">
             </figure>
         </div>
     </div>
