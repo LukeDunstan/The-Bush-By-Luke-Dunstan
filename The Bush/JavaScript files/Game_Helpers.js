@@ -1,4 +1,5 @@
 
+//initialise sounds
 var Sounds = {
     lowIntensityMusic: "../Sounds/BackTrack.wav",
     highIntensityMusic: "../Sounds/higher intensity backtrack.mp3",
@@ -36,6 +37,7 @@ var items = {
     "car-battery": { "src": "../Images/car-battery.png" },
 };
 
+
 var backLocations = {
     "Car": "../Locations/Clearing.html",
     "Outside-Hut": "../Locations/Clearing.html",
@@ -51,7 +53,6 @@ function init() {
     clearInterval(fontInterval)
     InitCommonElements();
     initMusic();
-    // InitCommonEventListeners();
     checkSlots();
     initDragDrop();
     fontInterval = setInterval(FontSizeControl, 100);
@@ -89,6 +90,7 @@ function CheckIfFirstTime() {
 }
 
 function InitDialogueBox() {
+    initMusic();
     $("#backdrop").append(
         "<div class='dialogue ui ui2'> \
         <figure id= 'portrait'> <img class='portrait-img' src='undefined' ></figure>\
@@ -130,7 +132,6 @@ function initDragDrop() {
         start: function (e, ui) {
             $("#" + e.currentTarget.id).removeClass("in-inventory");
             var target = $("#" + e.currentTarget.id).parent().attr("class");
-            // console.log($("#" + e.currentTarget.id).parent);
             if (target != undefined && target.includes("inventory-slot")) {
                 localStorage.removeItem($("#" + e.currentTarget.id).parent().attr("id") + "-item");
             }
@@ -140,17 +141,15 @@ function initDragDrop() {
     $(".inventory-slot").droppable({
         accept: ".item",
         drop: function (e, ui) {
-            // console.log(e.target.id)
             ui.draggable.appendTo($(e.target))
             ui.draggable.addClass("in-inventory");
-            // localStorage.setItem(e.target.id + "-item", ui.draggable[0].id);
-            // console.log(ui.draggable[0].id)
 
         }
     })
     console.log('dragdrop initialised')
 }
 
+//setup background music of scene based on game events
 function initMusic() {
     if (localStorage.getItem("killerComing")) {
         var music = new Audio(Sounds.highIntensityMusic);
@@ -182,6 +181,7 @@ function checkSlots() {
     }
 }
 
+//search inventory for item
 function SearchSlots(itemToSearchFor) {
     var itemsInInventory
     for (var i = 1; i <= 4; i++) {
@@ -193,6 +193,7 @@ function SearchSlots(itemToSearchFor) {
     return false
 }
 
+// remove item from inventory
 function RemoveFromInventory(ItemToRemove) {
     var itemsInInventory
     for (var i = 1; i <= 4; i++) {
@@ -215,6 +216,7 @@ function CheckIfTrueInStorage(ItemToCheck) {
     }
 }
 
+//insert a line of dialogue for a given text, speaker, and location to transition to after click
 function insertDialogue(dialogueString, speakerName, href) {
     $(".ui1").hide();
     $(".dialogue").show();
@@ -255,6 +257,7 @@ function GetTimeBetweenIntervals() {
     console.log("dateNow: " + Date.now())
 }
 
+//insert a line of narration for a given text, and location to transition to after click
 function insertNarration(dialogueString, href) {
     $(".ui1").hide();
     $(".speaker-heading").hide();

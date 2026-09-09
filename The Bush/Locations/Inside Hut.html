@@ -17,6 +17,7 @@
         var timer;
         var secondsToWait = 5;
 
+        //sound def
         var doorCreak = new Audio(Sounds.doorCreak);
         var paperRustle = new Audio(Sounds.paperRustle);
         var doorRattle = new Audio(Sounds.doorRattle);
@@ -28,13 +29,15 @@
 
         $(document).ready(function () {
             doorCreak.playbackRate = 1.8;
+           
+            //set battery if player hasn't picked it up
             if (localStorage.getItem("killerCame") && !localStorage.getItem("killerDead")) {
                 $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
             }
 
             init();
-            $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
-
+             $("#back-button").on("click", function () { window.location.href = "../Locations/Outside Hut.html" });
+            //dialogue on battery pickup
             $(".inventory-slot").one(
                 "drop", function (e, ui) {
                     console.log("dropped")
@@ -45,6 +48,7 @@
                 }
             )
 
+            //set scene state based on previous actions
             if (CheckIfFirstTime()) {
                 doorCreak.play();
                 if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
@@ -52,10 +56,10 @@
                 } else if (SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
                     insertDialogue("Hmm, no one's here. I should really find somewhere to charge my phone", "Josef")
                 }
-            }   else if (localStorage.getItem("killerEvent")){
+            } else if (localStorage.getItem("killerEvent")) {
                 window.location.href = "../Locations/Inside Hut-Killer-Event.html";
             }
-             else if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
+            else if (localStorage.getItem("cellarUnlocked") && !localStorage.getItem("rangerTalked")) {
                 RangerJosefDialogue();
             } else if (localStorage.getItem("killerComing") && !localStorage.getItem("killerCame")) {
                 KillerComing();
@@ -63,7 +67,7 @@
                 PostLocker();
             }
 
-
+            //desk actions
             $("#desk").on("click", function () {
                 if (SearchSlots("phone")) {
                     insertDialogue("Nice, I can plug my phone in here, *Click*", "Josef");
@@ -95,6 +99,8 @@
                 }
 
             })
+
+            //cellar actions
             $("#cellar").on("click", function () {
                 if (SearchSlots("phone")) {
                     insertDialogue("I should really charge this phone", "Josef");
@@ -102,16 +108,16 @@
                     insertDialogue("I already let the ranger out, we need to escape", "Josef");
                 } else if (localStorage.getItem("isPhoneCharging")) {
                     doorRattle.play();
-                    insertDialogue("*Thump Thump*... *Muffled pleas for help*", "Cody?");
+                    insertDialogue("*Thump Thump*... *Muffled pleas for help*", "unknown");
                     $(".dialogue").one("click", function () {
-                        insertDialogue("Cody are you in there?!? I'll try and get this open", "Josef");
+                        insertDialogue("Is someone in there?!?", "Josef");
                         $(".dialogue").one("click", function () {
                             doorRattle.play();
                             insertNarration("The doors are locked shut.")
                             $(".dialogue").one("click", function () {
                                 if (hasAxe) {
                                     insertDialogue("I can use the axe to break to door, Step back", "Josef", "../Minigames/UnlockCellar.html");
-                                } else if (localStorage.getItem("axeBroken")) {
+                                } else if (localStorage.getItem("unlockFailed")) {
                                     insertDialogue("I'm sorry, I cant open the door!", "Josef");
                                 } else {
                                     insertDialogue("I need something heavy to break the door, there was an axe outside I could use", "Josef");
@@ -134,10 +140,30 @@
             })
         })
 
+        //dialogue for after realesing the ranger
         function RangerJosefDialogue() {
-            insertNarration("you help out the person in the cellar to find they are not Cody but the Ranger of this hut, missing two fingers");
+            insertNarration("You help out the person in the cellar to find they are missing two fingers");
             $(".dialogue").one("click", function () {
-                insertDialogue("You're not Cody, who are you?", "Josef");
+                if(localStorage.getItem("unlockFailed")) {
+                    insertDialogue("Who are you?", "Josef");
+                $(".dialogue").one("click", function () {
+                    insertDialogue("Thank you for rescuing me, I'm the Ranger of this park.", "Ranger");
+                    $(".dialogue").one("click", function () {
+                        insertDialogue("There is a psycopath canibal loose, he locked me in the cellar after taking two of my fingers for a snack", "Ranger");
+                        $(".dialogue").one("click", function () {
+                            insertDialogue("Jesus, I knew there was something going on but a canibal? Can you help me escape?", "Josef");
+                            $(".dialogue").one("click", function () {
+                                insertDialogue("Sure thing kid, that's kind of my job", "Ranger");
+                                $(".dialogue").one("click", function () {
+                                    insertNarration("The Ranger has joined you");
+                                    localStorage.setItem("rangerTalked", true);
+                                })
+                            })
+                        })
+                    })
+                })
+                } else {
+                    insertDialogue("You're not Cody, who are you?", "Josef");
                 $(".dialogue").one("click", function () {
                     insertDialogue("Thank you for rescuing me, I'm the Ranger of this park.", "Ranger");
                     $(".dialogue").one("click", function () {
@@ -157,15 +183,17 @@
                         })
                     })
                 })
+                }
 
             })
         }
 
+        //scene for when the kill walks into the hut and josef is hidden
         function KillerWalksIn() {
-
             insertNarration("A hooded figure walks into the hut and over to the desk, placing a car battery on top and sighing as he takes his hood off revealing... Cody?!");
             cody.play();
             $("#car-battery-fig").append("<img id='car-battery' class='item' src='../Images/car-battery.png'>");
+            initDragDrop();
             $(".dialogue").one("click", function () {
                 if (!localStorage.getItem("cellarUnlocked")) {
                     insertNarration("Cody notices the mess left by Josef looking at the desk.")
@@ -199,9 +227,10 @@
                     })
                 }
             })
-            
+
         }
 
+        //sequence for killer walking from the car to the hut
         function KillerComing() {
             carDoor.play();
             insertNarration("*Thump* A car door closes outside");
@@ -211,6 +240,7 @@
                 } else {
                     insertDialogue("Who is that? I should probably hide", "Josef");
                 }
+                $("#back-button").hide();
                 $(".dialogue").one("click", function () {
                     localStorage.setItem("killerComing", true);
                     timer = 0;
@@ -220,7 +250,9 @@
             })
         }
 
+        //dialogue for after hiding from the killer
         function PostLocker() {
+            $("#back-button").show();
             if (!localStorage.getItem("rangerTalked")) {
                 insertDialogue("Oh my god, Cody is the killer? If he's there then who is in the cellar?", "Josef");
                 $(".dialogue").one("click", function () {
@@ -237,6 +269,7 @@
             }
         }
 
+        //events happening once reading the phone messages
         function PhoneMessages() {
             insertDialogue("Thank god, the phone has charge. Jeez I have so many messages", "Josef");
             $(".dialogue").one("click", function () {
@@ -308,6 +341,7 @@
 
         }
 
+        //timer till killer walks into the hut
         function WalkingTimer() {
             timer += 1;
             if (timer >= secondsToWait) {
@@ -322,6 +356,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="stage">

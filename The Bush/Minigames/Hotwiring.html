@@ -20,18 +20,20 @@
         $(document).ready(function () {
             InitDialogueBox()
             
-            insertNarration("Connect the correct wires to complete the circuit and turn on the car before Cody catches you")
+            //how to play
+            insertNarration("Connect the correct wires to complete the circuit and turn on the car before Cody catches you");
+            //start minigame
             $(".dialogue").one("click", function () {
                 gameInterval = setInterval(MainLoop, 100);
                 HotwiringDraw();
             })
         })
 
+
         function MainLoop() {
-            thisDeltaTime = GetTimeBetweenIntervals();
+            thisDeltaTime = GetTimeBetweenIntervals(); //time between each mainLoop call
             timer += 1 * thisDeltaTime;
-            console.log("deltaTime: " + thisDeltaTime);
-            console.log("timer: " + timer);
+
             if (timer >= secondsTilDeath) {
                 localStorage.setItem("deathRespawn", window.location.href);
                 clearInterval(gameInterval);
@@ -39,6 +41,7 @@
             }
         }
 
+        //initial draw of wires and drag/drop setup
         function HotwiringDraw() {
             $("svg").attr("height", $(".stage").height());
             $("svg").attr("width", $(".stage").width());
@@ -78,11 +81,13 @@
             })
         }
 
+        //win state
         function BothConnected() {
             carStart.play();
             insertDialogue("Sweet it started! Let's get out of here", "Josef", "../Locations/Ending.html");
         }
 
+        //position vector line based on parameters with tuned offsets
         function SetLinePos(lineID, xStart, yStart, xEnd, yEnd) {
             $("#" + lineID).attr("x1", xStart + 40);
             $("#" + lineID).attr("y1", yStart + 18);
@@ -90,6 +95,7 @@
             $("#" + lineID).attr("y2", yEnd + 18);
         }
 
+        //pull pixel offset from string attribute
         function GetNumberFromPXAttr(selector, attr) {
             return Number($("#" + selector).css(attr).substring(0, $("#" + selector).css(attr).length - 2));
         }
@@ -98,8 +104,9 @@
 
 <body>
     <div id="backdrop">
-        <img id="hub" src="../Images/hotwire background.png">
-        <div class=stage style="position: relative;">
+        
+        <div class=stage>
+            <img id="hub" src="../Images/hotwire background.png">
             <svg height="0" width="0" style="position: absolute;">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:red;stroke-width:14" id="power-line"></line>
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:#0000ff;stroke-width:14" id="ignition-line">

@@ -26,9 +26,11 @@
 
 
             InitDialogueBox();
+
             setInterval(MoveAxe, 1);
             $(document).on('keydown', hit);
 
+            //key down
             function hit(e) {
                 if (e.keyCode == keyCode) {
                     chop.play();
@@ -43,17 +45,23 @@
                 if (strikes > 2) {
                     if (!localStorage.getItem("unlockFailed")) {
                         localStorage.setItem("unlockFailed", true);
+                        localStorage.setItem("killerComing", true);
                         insertNarration("*Thump* A car door closes outside", "../Locations/Inside Hut.html");
                     } else {
                         insertNarration("*Crack* The axe breaks, leaving Josef with nothing to open the cellar with");
                         $(".dialogue").one("click", function () {
+                            RemoveFromInventory("axe");
                             insertDialogue("I'm so sorry, I've got to get out of here", "Josef", "../Locations/Inside Hut.html");
                         })
                     }
                 }
             }
+
+            //move axe 
             function MoveAxe() {
-                thisDeltaTime = GetTimeBetweenIntervals();
+                thisDeltaTime = GetTimeBetweenIntervals(); // time between moveAxe calls
+
+                // axe image left offset / parent of axe -> bar.width * 100 == position of axe along bar in percentage
                 axePosPercent = Number(axeIconElement.css("left").substring(0, axeIconElement.css("left").length - 2)) / axeIconElement.parent().width() * 100;
                 if (axePosPercent <= minPos) {
                     goingUp = true;
@@ -71,6 +79,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id=stage>

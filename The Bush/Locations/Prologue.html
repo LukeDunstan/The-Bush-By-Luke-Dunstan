@@ -12,7 +12,10 @@
     <script src="../JavaScript files/Game_Helpers.js"></script>
     <script>
         $(document).ready(function () {
-            $("#backdrop").on("click", function () {window.location.href = "./Clearing.html"})
+            //continue to game
+            $("#backdrop").on("click", function () {window.location.href = "./Clearing.html"});
+
+            //audio setup
             var fall = new Audio(Sounds.fall);
             var stickBreak = new Audio(Sounds.stickBreak);
             fall.play();
@@ -21,6 +24,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="ending-text">

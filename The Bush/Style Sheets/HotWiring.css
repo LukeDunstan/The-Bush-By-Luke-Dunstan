@@ -1,6 +1,10 @@
 #hub {
     position: absolute;
-    width: 80.1%;
+    width: 100%;
+}
+
+.stage {
+    position: relative;
 }
 
 #power-line-start {

@@ -13,13 +13,18 @@
     <script>
         $(document).ready(function () {
             init();
+
+            //sound setup
             var lowBattery = new Audio(Sounds.lowBattery);
+
+            //scene setup based on previous actions
             if (CheckIfFirstTime()) {
                 insertDialogue("I should look around and see if I can get help, maybe try and call someone if I can find my phone.", "Josef");
             }
 
-            $("#back-button").on("click", function () { window.location.href = "../Locations/index.html" })
+            $("#back-button").on("click", function () { window.location.href = "../index.html" })
 
+            //bag actions
             $("#bag").on("click", function () {
                 if (!SearchSlots("phone") && !localStorage.getItem("isPhoneCharging")) {
                     insertDialogue("Bruh, my things are every where.. I could've sworn I left my phone in the front pocket. *bump* Oh there is is.", "Josef");
@@ -43,14 +48,17 @@
                 }
 
             })
-            $("#fire").on("click", function () { insertDialogue("Being cold is the last of my worries", "Josef") });
-            $("#pants").on("click", function () { insertDialogue("I'm not sure how those will help me now", "Josef") });
+
+            //car location connection
             $("#car-path").on("click", function () { insertDialogue("I need to get out of here, maybe I can hot wire the car..", "Josef", "./Car.html") });
+
+            //hut location connection
             $("#hut-path").on("click", function () { insertDialogue("look! a house with a light on.", "Josef", "./Outside Hut.html") });
         })
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="stage">

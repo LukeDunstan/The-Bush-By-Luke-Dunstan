@@ -21,28 +21,33 @@
             var headIconElement = $("#head");
             var thisDeltaTime;
 
+            //audio setup
             var thump = new Audio(Sounds.fall);
 
             $(document).one('keydown', EDown);
             InitDialogueBox();
 
-            insertNarration("Read the instructions above, click when ready to start")
+            //how to play
+            insertNarration("Read the instructions above, click when ready to start");
+            //start minigame
             $(".dialogue").one("click", function () {
                 timerInterval = setInterval(mainLoop, 10);
                 MoveHead();
             })
 
             function mainLoop() {
+                //time between each mainLoop call
                 thisDeltaTime = GetTimeBetweenIntervals();
+
                 if (isDown) {
-                    timer += 1 * thisDeltaTime;
+                    timer += 1 * thisDeltaTime; 
                 } else {
                     timer -= 1 * thisDeltaTime;
                 }
 
                 MoveHead();
                 gameTimer += 1 * thisDeltaTime;
-                console.log(gameTimer);
+
                 if (timer >= tooLongTreshold || timer <= 0) {
                     insertDialogue("I knew there was someone in here", "Cody", '../Locations/Death.html');
                     localStorage.setItem("deathRespawn", "../Minigames/Breathing.html");
@@ -55,6 +60,7 @@
                 }
             }
 
+            //key down
             function EDown(event) {
                 if (event.code == code) {
                     $(document).one('keyup', EUp);
@@ -64,6 +70,7 @@
                 }
             }
 
+            //key up
             function EUp(event) {
                 if (event.code == code) {
                     $(document).one('keydown', EDown);
@@ -80,6 +87,7 @@
 
             }
 
+            //change head colour based on where it is on the bar
             setInterval(function () {
                 if (timer / tooLongTreshold * 100 < 10) {
                     headIconElement.attr("src", "../Images/head-red.png")
@@ -99,6 +107,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="stage">

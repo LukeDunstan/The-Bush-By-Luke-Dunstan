@@ -14,27 +14,30 @@
         var pullAway = new Audio(Sounds.pullAway);
         $(document).ready(function () {
 
-            $("#backdrop").one("click", function () { 
+            //go to menu
+            $("#backdrop").one("click", function () {
                 localStorage.clear();
-                window.location.href = "../Locations/index.html" })
+                window.location.href = "../index.html"
+            })
 
-            if (localStorage.getItem("killerDead") == true) {
-                if (localStorage.getItem("rangerDead") == true) {
+            //display ending based on events
+            if (localStorage.getItem("killerDead")) {
+                if (localStorage.getItem("rangerDead")) {
                     Ending1();
                 } else {
                     Ending4();
                 }
-            } else if (localStorage.getItem("cellarUnlocked") == true) {
-                Ending2();
-            } else {
+            } else if (localStorage.getItem("cellarUnlocked")) {
                 Ending3();
+            } else {
+                Ending2();
             }
 
             function Ending1() {
                 $("#ending-text").append(
                     '<h1> Epilogue </h1>\
             <p> The Killer is dead but so is the ranger. \
-                    Josef does not end up facing any criminal action as he killed in self-defence however Josef must live with killing a friend as well as having someone die for him.\
+                    Josef does not end up facing any criminal action as he killed in self-defence however, Josef must live with killing a friend as well as having someone die for him.\
                     Josef was never the same after this event. </p>\
                     '
                 )
@@ -46,8 +49,8 @@
                 $("#ending-text").append(
                     '<h1> Epilogue </h1>\
             <p>  Josef leaves the ranger behind in the cellar and escapes.\
-                 Tobias is preoccupied with the ranger and does not notice the police coming for him.\
-                  The ranger is be found dead but Tobias is be arrested.\
+                 Cody is preoccupied with the ranger and does not notice the police coming for him.\
+                  The ranger is found dead but Cody is arrested.\
                    Josef must live with the fact that he left someone to die to save himself. </p>\
                     '
                 )
@@ -58,8 +61,8 @@
                 $("#ending-text").append(
                     '<h1> Epilogue </h1>\
             <p> The player and the ranger escape together.\
-                 The police arrive at the scene with Tobias missing.\
-                  They are both safe but Tobias remains free and ready for his next meal. </p>\
+                 The police arrive at the scene with Cody missing.\
+                  They are both safe but Cody remains free and ready for his next meal. </p>\
                     '
                 )
             }
@@ -78,6 +81,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="ending-text">

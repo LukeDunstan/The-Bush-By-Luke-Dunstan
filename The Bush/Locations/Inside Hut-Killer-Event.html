@@ -13,6 +13,7 @@
     <script>
         $(document).ready(function () {
 
+            //audio setup
             var gunshot = new Audio(Sounds.gunshot);
             gunshot.volume = .5;
             var gunCock = new Audio(Sounds.gunCock);
@@ -100,7 +101,6 @@
                                                                                         insertNarration('"Do not go with that man!"~Mum "Police came around asking about Cody"~Kate "Bro i just heard Cody is a serial killer?"~George');
                                                                                         $(".dialogue").one("click", function () {
                                                                                             localStorage.setItem("killerDead", true);
-                                                                                            localStorage.setItem("rangerDead", false);
                                                                                             insertDialogue("Cody was the killer?", "Josef", "../Locations/Ending.html");
                                                                                             localStorage.setItem("killerEvent", false);
                                                                                         })
@@ -127,6 +127,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="stage">

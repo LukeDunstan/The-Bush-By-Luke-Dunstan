@@ -13,11 +13,16 @@
     <script>
         $(document).ready(function () {
             init();
+
+            //set scene state based on previous actions
             if (CheckIfFirstTime()) {
                 insertDialogue("hmm..The lights didn't turn on. I think the battery is dead.", "Josef");
             }
+
+            //power button dialogue
             $("#power-button").on("click", function () { insertDialogue("I don't have the keys, Cody has them.", "Josef") });
 
+            //wire box actions
             $("#wire-box").on("click", function () {
                 if (SearchSlots("car-battery")) {
                     insertDialogue("I can put this battery in now and get to hotwiring.", "Josef", "../Minigames/Hotwiring.html");
@@ -31,6 +36,7 @@
     </script>
 </head>
 
+<!-- html -->
 <body>
     <div id="backdrop">
         <div id="stage">
