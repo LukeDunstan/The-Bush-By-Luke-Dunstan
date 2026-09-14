@@ -101,6 +101,7 @@ function InitDialogueBox() {
     );
 
     $(".dialogue").hide();
+    fontInterval = setInterval(FontSizeControl, 100);
 }
 
 //initialise event listeners that are common between scenes
