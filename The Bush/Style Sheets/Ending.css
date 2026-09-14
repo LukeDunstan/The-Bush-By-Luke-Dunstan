@@ -1,15 +1,11 @@
-#backdrop {
+/* #backdrop {
     background-color: black;
     max-width: 1000px;
     height: 75%;
     aspect-ratio: 16/9;
     margin: auto;
     margin-top: 100px;
-}
-
-#ending-text {
-    
-}
+} */
 
 html {
     color: white;
